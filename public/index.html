@@ -1,9 +1,13 @@
-<!DOCTYPE html>
+import os
+
+os.makedirs('public', exist_ok=True)
+
+html_content = """<!DOCTYPE html>
 <html lang="fr" class="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JobTalent - Réseau Pro & IA CV Tailor</title>
+    <title>JobTalent - Réseau Pro & Tarifs Officiels</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -26,8 +30,8 @@
 
     <!-- HEADER / NAVIGATION -->
     <header class="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 sticky top-0 z-50">
-        <div class="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
-            <div class="flex items-center space-x-3">
+        <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('landing')">
                 <div class="w-10 h-10 bg-gradient-to-br from-cyan-400 to-blue-700 rounded-xl flex items-center justify-center shadow-md shadow-cyan-500/20 text-white p-1.5">
                     <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
                         <path d="M12 8L24 6L28 14L16 16L12 8Z" fill="url(#paint0_linear)" />
@@ -55,10 +59,14 @@
                 </div>
             </div>
             
-            <nav class="hidden md:flex space-x-1 overflow-x-auto py-1">
+            <nav class="hidden lg:flex space-x-1 overflow-x-auto py-1">
                 <button onclick="switchTab('landing')" id="btn-landing" class="px-3 py-2 rounded-lg text-sm font-medium text-indigo-600 bg-indigo-50 dark:bg-indigo-950/50 transition flex items-center space-x-1.5 shrink-0">
                     <i data-lucide="home" class="w-4 h-4"></i>
                     <span>Accueil</span>
+                </button>
+                <button onclick="switchTab('pricing')" id="btn-pricing" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-indigo-600 transition flex items-center space-x-1.5 shrink-0">
+                    <i data-lucide="tag" class="w-4 h-4"></i>
+                    <span>Tarifs</span>
                 </button>
                 <button onclick="switchTab('feed')" id="btn-feed" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-indigo-600 transition flex items-center space-x-1.5 shrink-0">
                     <i data-lucide="newspaper" class="w-4 h-4"></i>
@@ -77,33 +85,13 @@
                     <i data-lucide="globe" class="w-4 h-4"></i>
                     <span>France Travail</span>
                 </button>
-                <button onclick="switchTab('pitch')" id="btn-pitch" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-indigo-600 transition flex items-center space-x-1.5 shrink-0">
-                    <i data-lucide="video" class="w-4 h-4"></i>
-                    <span>Pitch IA</span>
-                </button>
-                <button onclick="switchTab('skillsgap')" id="btn-skillsgap" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-indigo-600 transition flex items-center space-x-1.5 shrink-0">
-                    <i data-lucide="target" class="w-4 h-4"></i>
-                    <span>Gap Skills</span>
-                </button>
-                <button onclick="switchTab('salary')" id="btn-salary" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-indigo-600 transition flex items-center space-x-1.5 shrink-0">
-                    <i data-lucide="trending-up" class="w-4 h-4"></i>
-                    <span>Salaires</span>
-                </button>
-                <button onclick="switchTab('certifications')" id="btn-certifications" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-indigo-600 transition flex items-center space-x-1.5 shrink-0">
-                    <i data-lucide="award" class="w-4 h-4"></i>
-                    <span>Certifications</span>
-                </button>
-                <button onclick="switchTab('interview')" id="btn-interview" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-indigo-600 transition flex items-center space-x-1.5 shrink-0">
-                    <i data-lucide="mic" class="w-4 h-4"></i>
-                    <span>Coach Entretien</span>
-                </button>
                 <button onclick="switchTab('kanban')" id="btn-kanban" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-indigo-600 transition flex items-center space-x-1.5 shrink-0">
                     <i data-lucide="kanban" class="w-4 h-4"></i>
                     <span>Kanban</span>
                 </button>
-                <button onclick="switchTab('career')" id="btn-career" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-indigo-600 transition flex items-center space-x-1.5 shrink-0">
-                    <i data-lucide="compass" class="w-4 h-4"></i>
-                    <span>Carrière</span>
+                <button onclick="switchTab('salary')" id="btn-salary" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-indigo-600 transition flex items-center space-x-1.5 shrink-0">
+                    <i data-lucide="trending-up" class="w-4 h-4"></i>
+                    <span>Salaires</span>
                 </button>
                 <button onclick="switchTab('chat')" id="btn-chat" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-indigo-600 transition flex items-center space-x-1.5 shrink-0 relative">
                     <i data-lucide="message-square" class="w-4 h-4"></i>
@@ -114,16 +102,12 @@
                     <i data-lucide="briefcase" class="w-4 h-4"></i>
                     <span>Suivi</span>
                 </button>
-                <button onclick="switchTab('prod')" id="btn-prod" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-indigo-600 transition flex items-center space-x-1.5 shrink-0">
-                    <i data-lucide="settings" class="w-4 h-4"></i>
-                    <span>Prod</span>
-                </button>
             </nav>
 
             <div class="flex items-center space-x-2 shrink-0">
-                <button onclick="openReferralModal()" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800 hover:bg-indigo-100 transition flex items-center space-x-1">
-                    <i data-lucide="gift" class="w-3.5 h-3.5"></i>
-                    <span>Parrainer</span>
+                <button onclick="openPricingModal()" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-gradient-to-r from-amber-500 to-indigo-600 text-white shadow hover:opacity-90 transition flex items-center space-x-1">
+                    <i data-lucide="crown" class="w-3.5 h-3.5"></i>
+                    <span>Devenir Pro</span>
                 </button>
                 <button onclick="toggleRecruiterMode()" id="btn-recruiter-mode" class="px-3 py-1.5 rounded-xl text-xs font-semibold border border-slate-300 dark:border-slate-700 hover:border-indigo-500 transition flex items-center space-x-1">
                     <i data-lucide="user-cog" class="w-3.5 h-3.5"></i>
@@ -145,26 +129,27 @@
             <div class="text-center space-y-6 max-w-3xl mx-auto px-4">
                 <div class="inline-flex items-center space-x-2 bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 px-4 py-1.5 rounded-full text-xs font-bold border border-indigo-200 dark:border-indigo-800 shadow-sm">
                     <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
-                    <span>La révolution du recrutement sans CV classique</span>
+                    <span>La révolution du recrutement intelligent</span>
                 </div>
                 <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
                     Le Réseau Pro où l'IA adapte ton CV <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-indigo-600">sur-mesure</span>.
                 </h1>
                 <p class="text-base text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
-                    Fini les CV ignorés par les filtres ATS. Importez votre profil, laissez l'IA le cibler en 1 clic pour chaque offre et postulez directement auprès des meilleures entreprises.
+                    Fini les CV ignorés par les filtres ATS. Importez votre profil, laissez l'IA le cibler en 1 clic pour chaque offre et postulez directement.
                 </p>
                 <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
                     <button onclick="switchTab('ai')" class="w-full sm:w-auto bg-indigo-600 text-white font-bold px-8 py-3.5 rounded-2xl shadow-lg shadow-indigo-500/25 hover:bg-indigo-700 transition flex items-center justify-center space-x-2">
                         <i data-lucide="wand-2" class="w-4 h-4"></i>
                         <span>Tester l'IA Tailor gratuitement</span>
                     </button>
-                    <button onclick="switchTab('feed')" class="w-full sm:w-auto bg-white dark:bg-slate-900 text-slate-900 dark:text-white font-bold px-8 py-3.5 rounded-2xl border border-slate-300 dark:border-slate-700 hover:border-indigo-500 transition flex items-center justify-center space-x-2">
-                        <i data-lucide="newspaper" class="w-4 h-4"></i>
-                        <span>Explorer les offres d'emploi</span>
+                    <button onclick="switchTab('pricing')" class="w-full sm:w-auto bg-white dark:bg-slate-900 text-slate-900 dark:text-white font-bold px-8 py-3.5 rounded-2xl border border-slate-300 dark:border-slate-700 hover:border-indigo-500 transition flex items-center justify-center space-x-2">
+                        <i data-lucide="tag" class="w-4 h-4"></i>
+                        <span>Voir nos tarifs & offres</span>
                     </button>
                 </div>
             </div>
 
+            <!-- Démo Live Card -->
             <div class="bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl max-w-3xl mx-auto space-y-6">
                 <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
                     <div class="flex items-center space-x-2">
@@ -192,151 +177,108 @@
             </div>
         </div>
 
-        <!-- ONGLET : KANBAN -->
-        <div id="tab-kanban" class="hidden space-y-6">
-            <div class="bg-gradient-to-r from-indigo-900 via-blue-900 to-cyan-800 text-white p-6 rounded-2xl shadow-lg space-y-2">
-                <div class="flex items-center space-x-2">
-                    <i data-lucide="kanban" class="w-6 h-6 text-cyan-300"></i>
-                    <h2 class="text-xl font-bold">Kanban Visuel des Candidatures</h2>
+        <!-- ONGLET : TARIFS & MODÈLE ÉCONOMIQUE (PROPRE ET STRUCTURÉ) -->
+        <div id="tab-pricing" class="hidden space-y-10 py-4">
+            <div class="text-center space-y-3 max-w-2xl mx-auto">
+                <div class="inline-flex items-center space-x-1.5 bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 px-3.5 py-1 rounded-full text-xs font-bold">
+                    <i data-lucide="crown" class="w-3.5 h-3.5"></i>
+                    <span>Transparence & Rentabilité</span>
                 </div>
-                <p class="text-sm text-cyan-100">Glissez ou déplacez vos candidatures à travers les différentes étapes de recrutement.</p>
+                <h2 class="text-3xl font-extrabold tracking-tight">Des tarifs adaptés pour les candidats et les recruteurs</h2>
+                <p class="text-sm text-slate-600 dark:text-slate-400">Choisissez l'offre qui correspond exactement à vos ambitions professionnelles ou à vos besoins de recrutement.</p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <div class="bg-slate-100 dark:bg-slate-900/60 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-3">
-                    <div class="flex items-center justify-between font-bold text-xs uppercase text-slate-500">
-                        <span>À postuler (2)</span>
-                        <span class="w-2 h-2 rounded-full bg-slate-400"></span>
-                    </div>
-                    <div class="space-y-2" id="kanban-col-1">
-                        <div class="bg-white dark:bg-slate-900 p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-2">
-                            <h4 class="font-bold text-xs">Lead Front-End React</h4>
-                            <p class="text-[11px] text-slate-500">Stripe • Remote</p>
-                            <button onclick="moveKanbanCard(this, 'col-2')" class="text-[10px] bg-indigo-50 dark:bg-indigo-950 text-indigo-600 font-semibold px-2.5 py-1 rounded-lg w-full">Déplacer vers Envoyé →</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-slate-100 dark:bg-slate-900/60 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-3">
-                    <div class="flex items-center justify-between font-bold text-xs uppercase text-indigo-600">
-                        <span>Envoyé (1)</span>
-                        <span class="w-2 h-2 rounded-full bg-indigo-500"></span>
-                    </div>
-                    <div class="space-y-2" id="kanban-col-2">
-                        <div class="bg-white dark:bg-slate-900 p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-2">
-                            <h4 class="font-bold text-xs">Développeur Front-End</h4>
-                            <p class="text-[11px] text-slate-500">NextGen Tech • Match 96%</p>
-                            <button onclick="moveKanbanCard(this, 'col-3')" class="text-[10px] bg-indigo-50 dark:bg-indigo-950 text-indigo-600 font-semibold px-2.5 py-1 rounded-lg w-full">Déplacer vers Entretien →</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-slate-100 dark:bg-slate-900/60 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-3">
-                    <div class="flex items-center justify-between font-bold text-xs uppercase text-purple-600">
-                        <span>Entretien (1)</span>
-                        <span class="w-2 h-2 rounded-full bg-purple-500"></span>
-                    </div>
-                    <div class="space-y-2" id="kanban-col-3">
-                        <div class="bg-white dark:bg-slate-900 p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-2">
-                            <h4 class="font-bold text-xs">React UI Engineer</h4>
-                            <p class="text-[11px] text-slate-500">ScaleUp Paris • Visio Jeudi</p>
-                            <button onclick="moveKanbanCard(this, 'col-4')" class="text-[10px] bg-emerald-50 dark:bg-emerald-950 text-emerald-600 font-semibold px-2.5 py-1 rounded-lg w-full">Déplacer vers Offre 🎉</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-slate-100 dark:bg-slate-900/60 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-3">
-                    <div class="flex items-center justify-between font-bold text-xs uppercase text-emerald-600">
-                        <span>Offre reçue (0)</span>
-                        <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-                    </div>
-                    <div class="space-y-2" id="kanban-col-4">
-                        <p class="text-[11px] text-slate-400 text-center py-6 italic">Glissez vos réussites ici !</p>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <!-- ONGLET : CARRIÈRE -->
-        <div id="tab-career" class="hidden space-y-6">
-            <div class="bg-gradient-to-r from-teal-900 to-emerald-800 text-white p-6 rounded-2xl shadow-lg space-y-2">
-                <div class="flex items-center space-x-2">
-                    <i data-lucide="compass" class="w-6 h-6 text-teal-300"></i>
-                    <h2 class="text-xl font-bold">Conseiller d'Orientation & Carrière IA</h2>
-                </div>
-                <p class="text-sm text-teal-100">Découvrez les évolutions de carrière recommandées par l'IA.</p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
-                    <span class="text-xs bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 font-bold px-3 py-1 rounded-full">Match 98%</span>
-                    <h3 class="font-bold text-base">Lead Front-End Architect</h3>
-                    <p class="text-xs text-slate-600 dark:text-slate-400">Passez sur un rôle de lead technique en encadrant des équipes dev.</p>
-                    <button onclick="showToast('Roadmap Lead Architect activée !')" class="w-full bg-emerald-600 text-white font-semibold py-2.5 rounded-xl text-xs">Explorer cette voie</button>
-                </div>
-                <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
-                    <span class="text-xs bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 font-bold px-3 py-1 rounded-full">Match 92%</span>
-                    <h3 class="font-bold text-base">Product Engineer / UI-UX Expert</h3>
-                    <p class="text-xs text-slate-600 dark:text-slate-400">Combine front-end et design d'interface.</p>
-                    <button onclick="showToast('Roadmap Product Engineer activée !')" class="w-full bg-indigo-600 text-white font-semibold py-2.5 rounded-xl text-xs">Explorer cette voie</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- ONGLET : PROFIL -->
-        <div id="tab-profile" class="hidden space-y-6">
-            <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
-                <div class="h-32 bg-gradient-to-r from-indigo-600 via-cyan-500 to-blue-700 relative"></div>
-                <div class="px-6 pb-6 relative pt-4 space-y-4">
-                    <div class="flex flex-col sm:flex-row sm:items-end justify-between -mt-16 gap-4">
-                        <div class="flex items-end space-x-4">
-                            <div id="profile-avatar-initials" class="w-24 h-24 bg-indigo-600 text-white font-extrabold rounded-2xl border-4 border-white dark:border-slate-900 flex items-center justify-center text-2xl shadow-lg">VO</div>
-                            <div class="mb-1">
-                                <div class="flex items-center space-x-2">
-                                    <h2 id="display-profile-name" class="text-xl font-extrabold">Alexandre Martin</h2>
-                                    <span id="profile-verified-badge" class="hidden inline-flex items-center space-x-1 bg-indigo-50 text-indigo-600 text-xs font-bold px-2 py-0.5 rounded-full border border-indigo-200">
-                                        <i data-lucide="shield-check" class="w-3 h-3"></i><span>Pro Vérifié</span>
-                                    </span>
-                                </div>
-                                <p id="display-profile-headline" class="text-xs text-slate-500">Développeur Front-End React | Passionné d'UI/UX & IA</p>
-                                <p id="display-profile-location" class="text-[11px] text-slate-400 mt-0.5">📍 Paris, France • Ouvert aux opportunités</p>
+            <!-- Section B2C : Candidats -->
+            <div class="space-y-4">
+                <h3 class="text-xl font-bold text-slate-800 dark:text-slate-200 flex items-center space-x-2">
+                    <i data-lucide="user" class="w-5 h-5 text-indigo-600"></i>
+                    <span>1. Offres & Tarifs Candidats (B2C)</span>
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Offre Découverte -->
+                    <div class="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-5 flex flex-col justify-between">
+                        <div class="space-y-3">
+                            <span class="text-xs bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold px-3 py-1 rounded-full">🟢 Offre Découverte</span>
+                            <div class="flex items-baseline space-x-1">
+                                <span class="text-3xl font-extrabold">0 €</span>
+                                <span class="text-xs text-slate-500">/ gratuit à vie</span>
                             </div>
+                            <p class="text-xs text-slate-500">Idéal pour découvrir la puissance de l'IA et prouver la valeur immédiate.</p>
+                            <ul class="space-y-2 text-xs text-slate-700 dark:text-slate-300">
+                                <li class="flex items-center space-x-2"><span>✅</span><span><strong>2 optimisations de CV</strong> gratuites par IA</span></li>
+                                <li class="flex items-center space-x-2"><span>✅</span><span>Accès au fil d'actualité et recherche d'offres (Flux France Travail)</span></li>
+                                <li class="flex items-center space-x-2"><span>✅</span><span>Création du profil professionnel de base</span></li>
+                            </ul>
                         </div>
-                        <button onclick="openEditProfileModal()" class="bg-indigo-600 text-white font-semibold px-4 py-2 rounded-xl text-xs hover:bg-indigo-700 transition">Modifier le profil</button>
+                        <button onclick="switchTab('ai')" class="w-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 font-bold py-3 rounded-xl text-xs transition">Commencer gratuitement</button>
                     </div>
 
-                    <div id="boost-status-banner" class="hidden bg-gradient-to-r from-amber-500/10 to-indigo-500/10 border border-amber-500/30 p-3 rounded-xl flex items-center justify-between text-xs">
-                        <div class="flex items-center space-x-2">
-                            <i data-lucide="zap" class="w-4 h-4 text-amber-500"></i>
-                            <span class="font-bold">🚀 Boost de visibilité x5 actif auprès des recruteurs</span>
-                        </div>
-                        <span class="text-amber-600 font-semibold">Prioritaire</span>
-                    </div>
-
-                    <div class="pt-4 border-t border-slate-100 dark:border-slate-800 space-y-3">
-                        <h3 class="font-bold text-sm">À propos</h3>
-                        <p id="display-profile-bio" class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">Développeur web passionné avec 3 ans d'expérience.</p>
-                    </div>
-
-                    <div class="pt-4 border-t border-slate-100 dark:border-slate-800 space-y-3">
-                        <h3 class="font-bold text-sm">Qui a consulté votre profil ?</h3>
-                        <div id="visitors-locked" class="bg-slate-50 dark:bg-slate-900/60 p-4 rounded-xl border text-center space-y-2">
-                            <p class="text-xs">🔒 <strong>4 recruteurs</strong> ont consulté votre profil cette semaine.</p>
-                            <button onclick="document.getElementById('paywall-modal').classList.remove('hidden')" class="text-xs bg-indigo-600 text-white font-bold px-4 py-2 rounded-xl">Passer à JobTalent Pro</button>
-                        </div>
-                        <div id="visitors-unlocked" class="hidden space-y-2">
-                            <div class="bg-slate-50 dark:bg-slate-950 p-3 rounded-xl border flex items-center justify-between text-xs">
-                                <div><span class="font-bold">Sarah (RH - NextGen Tech)</span><p class="text-[10px] text-slate-400">A consulté votre CV complet</p></div>
-                                <span class="text-[10px] text-slate-400">Il y a 12 min</span>
+                    <!-- Offre JobTalent Pro -->
+                    <div class="bg-gradient-to-b from-indigo-900/10 to-indigo-950/20 dark:from-indigo-950/40 dark:to-slate-900 p-6 rounded-3xl border-2 border-indigo-600 shadow-xl space-y-5 flex flex-col justify-between relative overflow-hidden">
+                        <div class="absolute top-4 right-4 bg-indigo-600 text-white text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Populaire 🚀</div>
+                        <div class="space-y-3">
+                            <span class="text-xs bg-indigo-600 text-white font-bold px-3 py-1 rounded-full">🟣 Offre JobTalent Pro</span>
+                            <div class="flex items-baseline space-x-1">
+                                <span class="text-3xl font-extrabold text-indigo-600 dark:text-indigo-400">9,99 €</span>
+                                <span class="text-xs text-slate-500">/ mois (ou 79€ / an)</span>
                             </div>
+                            <p class="text-xs text-slate-500">Pour les candidats actifs en quête rapide d'emploi et de visibilité maximale.</p>
+                            <ul class="space-y-2 text-xs text-slate-700 dark:text-slate-300">
+                                <li class="flex items-center space-x-2"><span>✨</span><span>Optimisations de CV & Lettres de motivation <strong>illimitées</strong></span></li>
+                                <li class="flex items-center space-x-2"><span>🛡️</span><span>Badge officiel <strong>"Vérifié Pro"</strong> sur le profil</span></li>
+                                <li class="flex items-center space-x-2"><span>🏆</span><span>Accès à tous les tests de certification de compétences</span></li>
+                                <li class="flex items-center space-x-2"><span>🤖</span><span>Simulateur d'entretien par IA illimité avec feedbacks</span></li>
+                                <li class="flex items-center space-x-2"><span>💬</span><span>Accès prioritaire au chat recruteur dès match > 90%</span></li>
+                            </ul>
                         </div>
+                        <button onclick="upgradeToPro()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-xl text-xs shadow-md transition">Activer JobTalent Pro (9,99€)</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section B2B : Entreprises & Recruteurs -->
+            <div class="space-y-4 pt-4">
+                <h3 class="text-xl font-bold text-slate-800 dark:text-slate-200 flex items-center space-x-2">
+                    <i data-lucide="briefcase" class="w-5 h-5 text-cyan-600"></i>
+                    <span>2. Offres & Tarifs Entreprises & Recruteurs (B2B)</span>
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Offre Starter -->
+                    <div class="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-5 flex flex-col justify-between">
+                        <div class="space-y-3">
+                            <span class="text-xs bg-cyan-50 dark:bg-cyan-950 text-cyan-700 dark:text-cyan-300 font-bold px-3 py-1 rounded-full">🔵 Offre Recruteur Starter</span>
+                            <div class="flex items-baseline space-x-1">
+                                <span class="text-3xl font-extrabold">49 €</span>
+                                <span class="text-xs text-slate-500">/ mois</span>
+                            </div>
+                            <p class="text-xs text-slate-500">Idéal pour les startups, PME et cabinets de recrutement.</p>
+                            <ul class="space-y-2 text-xs text-slate-700 dark:text-slate-300">
+                                <li class="flex items-center space-x-2"><span>✅</span><span>Jusqu'à <strong>5 offres d'emploi</strong> actives simultanément</span></li>
+                                <li class="flex items-center space-x-2"><span>📊</span><span>Classement automatique des candidats par score de compatibilité (IA Match)</span></li>
+                                <li class="flex items-center space-x-2"><span>👥</span><span>Espace de collaboration d'équipe (notes internes et avis)</span></li>
+                                <li class="flex items-center space-x-2"><span>📅</span><span>Planification d'entretiens synchronisée (Google Calendar / Outlook)</span></li>
+                            </ul>
+                        </div>
+                        <button onclick="showToast('Contactez notre équipe commerciale B2B pour activer Starter !')" class="w-full bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-3 rounded-xl text-xs transition">Souscrire Offre Starter</button>
                     </div>
 
-                    <div class="pt-4 border-t border-slate-100 dark:border-slate-800 space-y-3">
-                        <div class="flex items-center justify-between">
-                            <h3 class="font-bold text-sm">Compétences validées par l'IA</h3>
-                            <button onclick="extractSkillsFromBackground()" class="text-xs bg-indigo-50 text-indigo-600 px-3 py-1.5 rounded-xl font-semibold border">Extraire de mon parcours</button>
+                    <!-- Offre Scale -->
+                    <div class="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-5 flex flex-col justify-between">
+                        <div class="space-y-3">
+                            <span class="text-xs bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300 font-bold px-3 py-1 rounded-full">🔷 Offre Recruteur Scale</span>
+                            <div class="flex items-baseline space-x-1">
+                                <span class="text-3xl font-extrabold">149 €</span>
+                                <span class="text-xs text-slate-500">/ mois</span>
+                            </div>
+                            <p class="text-xs text-slate-500">Pour équiper les départements RH en croissance rapide.</p>
+                            <ul class="space-y-2 text-xs text-slate-700 dark:text-slate-300">
+                                <li class="flex items-center space-x-2"><span>🚀</span><span>Offres d'emploi et sourcing <strong>illimités</strong></span></li>
+                                <li class="flex items-center space-x-2"><span>🤖</span><span>Matching IA avancé et recherche sémantique de talents</span></li>
+                                <li class="flex items-center space-x-2"><span>🔗</span><span>Intégration ATS & API sur-mesure</span></li>
+                                <li class="flex items-center space-x-2"><span>⭐</span><span>Account Manager dédié et support prioritaire 7j/7</span></li>
+                            </ul>
                         </div>
-                        <div id="profile-skills-container" class="flex flex-wrap gap-2">
-                            <span class="bg-indigo-50 text-indigo-700 text-xs font-semibold px-3 py-1 rounded-xl border">React.js</span>
-                            <span class="bg-indigo-50 text-indigo-700 text-xs font-semibold px-3 py-1 rounded-xl border">Tailwind CSS</span>
-                            <span class="bg-indigo-50 text-indigo-700 text-xs font-semibold px-3 py-1 rounded-xl border">JavaScript</span>
-                        </div>
+                        <button onclick="showToast('Contactez l\'équipe Scale pour une démo personnalisée !')" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl text-xs transition">Souscrire Offre Scale</button>
                     </div>
                 </div>
             </div>
@@ -347,11 +289,11 @@
             <div class="bg-white dark:bg-slate-900 p-4 rounded-2xl border shadow-sm space-y-3">
                 <div class="flex items-center space-x-3">
                     <div class="w-10 h-10 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold text-sm">VO</div>
-                    <input type="text" id="post-input" placeholder="Partager une actualité pro..." class="flex-1 bg-slate-100 dark:bg-slate-800 border-none rounded-xl px-4 py-2.5 text-xs">
+                    <input type="text" id="post-input" placeholder="Partager une actualité pro..." class="flex-1 bg-slate-100 dark:bg-slate-800 border-none rounded-xl px-4 py-2.5 text-xs text-slate-900 dark:text-slate-100 focus:outline-none">
                 </div>
-                <div class="flex justify-between items-center pt-2 border-t">
+                <div class="flex justify-between items-center pt-2 border-t border-slate-100 dark:border-slate-800">
                     <span id="ai-credits-banner" class="text-xs text-indigo-600 font-semibold">2 optimisations gratuites restantes</span>
-                    <button onclick="createPost()" class="bg-indigo-600 text-white px-4 py-2 rounded-xl text-xs font-semibold">Publier</button>
+                    <button onclick="createPost()" class="bg-indigo-600 text-white px-4 py-2 rounded-xl text-xs font-semibold hover:bg-indigo-700 transition">Publier</button>
                 </div>
             </div>
             <div class="space-y-4" id="feed-list">
@@ -365,9 +307,9 @@
                     </div>
                     <h4 class="font-bold text-base">Développeur Front-End React / Vue.js H/F</h4>
                     <p class="text-xs text-slate-600 dark:text-slate-400">Nous recherchons un passionné pour rejoindre notre équipe produit.</p>
-                    <div class="flex items-center justify-between pt-2 border-t">
+                    <div class="flex items-center justify-between pt-2 border-t border-slate-100 dark:border-slate-800">
                         <span class="text-xs font-medium text-slate-500">Salaire : 45k€ - 55k€</span>
-                        <button onclick="quickApply('Développeur Front-End', 'Recherche expert React, Tailwind...')" class="bg-slate-900 text-white px-4 py-2 rounded-xl text-xs font-semibold">Postuler avec l'IA Tailor</button>
+                        <button onclick="quickApply('Développeur Front-End', 'Recherche expert React, Tailwind...')" class="bg-slate-900 text-white px-4 py-2 rounded-xl text-xs font-semibold hover:bg-indigo-600 transition">Postuler avec l'IA Tailor</button>
                     </div>
                 </div>
             </div>
@@ -390,6 +332,58 @@
             <div id="api-results" class="grid gap-4 md:grid-cols-2"></div>
         </div>
 
+        <!-- ONGLET : PROFIL -->
+        <div id="tab-profile" class="hidden space-y-6">
+            <div class="bg-white dark:bg-slate-900 rounded-2xl border shadow-sm overflow-hidden">
+                <div class="h-32 bg-gradient-to-r from-indigo-600 via-cyan-500 to-blue-700 relative"></div>
+                <div class="px-6 pb-6 relative pt-4 space-y-4">
+                    <div class="flex flex-col sm:flex-row sm:items-end justify-between -mt-16 gap-4">
+                        <div class="flex items-end space-x-4">
+                            <div id="profile-avatar-initials" class="w-24 h-24 bg-indigo-600 text-white font-extrabold rounded-2xl border-4 border-white dark:border-slate-900 flex items-center justify-center text-2xl shadow-lg">VO</div>
+                            <div class="mb-1">
+                                <div class="flex items-center space-x-2">
+                                    <h2 id="display-profile-name" class="text-xl font-extrabold">Alexandre Martin</h2>
+                                    <span id="profile-verified-badge" class="hidden inline-flex items-center space-x-1 bg-indigo-50 text-indigo-600 text-xs font-bold px-2 py-0.5 rounded-full border border-indigo-200">
+                                        <i data-lucide="shield-check" class="w-3 h-3"></i><span>Pro Vérifié</span>
+                                    </span>
+                                </div>
+                                <p id="display-profile-headline" class="text-xs text-slate-500">Développeur Front-End React | Passionné d'UI/UX & IA</p>
+                                <p id="display-profile-location" class="text-[11px] text-slate-400 mt-0.5">📍 Paris, France • Ouvert aux opportunités</p>
+                            </div>
+                        </div>
+                        <button onclick="showToast('Mode édition ouvert')" class="bg-indigo-600 text-white font-semibold px-4 py-2 rounded-xl text-xs hover:bg-indigo-700 transition">Modifier le profil</button>
+                    </div>
+
+                    <div id="boost-status-banner" class="hidden bg-gradient-to-r from-amber-500/10 to-indigo-500/10 border border-amber-500/30 p-3 rounded-xl flex items-center justify-between text-xs">
+                        <div class="flex items-center space-x-2">
+                            <i data-lucide="zap" class="w-4 h-4 text-amber-500"></i>
+                            <span class="font-bold">🚀 Boost de visibilité x5 actif auprès des recruteurs</span>
+                        </div>
+                        <span class="text-amber-600 font-semibold">Prioritaire</span>
+                    </div>
+
+                    <div class="pt-4 border-t border-slate-100 dark:border-slate-800 space-y-3">
+                        <h3 class="font-bold text-sm">À propos</h3>
+                        <p id="display-profile-bio" class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">Développeur web passionné avec 3 ans d'expérience.</p>
+                    </div>
+
+                    <div class="pt-4 border-t border-slate-100 dark:border-slate-800 space-y-3">
+                        <h3 class="font-bold text-sm">Qui a consulté votre profil ?</h3>
+                        <div id="visitors-locked" class="bg-slate-50 dark:bg-slate-900/60 p-4 rounded-xl border text-center space-y-2">
+                            <p class="text-xs">🔒 <strong>4 recruteurs</strong> ont consulté votre profil cette semaine.</p>
+                            <button onclick="openPricingModal()" class="text-xs bg-indigo-600 text-white font-bold px-4 py-2 rounded-xl hover:bg-indigo-700 transition">Passer à JobTalent Pro</button>
+                        </div>
+                        <div id="visitors-unlocked" class="hidden space-y-2">
+                            <div class="bg-slate-50 dark:bg-slate-950 p-3 rounded-xl border flex items-center justify-between text-xs">
+                                <div><span class="font-bold">Sarah (RH - NextGen Tech)</span><p class="text-[10px] text-slate-400">A consulté votre CV complet</p></div>
+                                <span class="text-[10px] text-slate-400">Il y a 12 min</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- ONGLET : IA TAILOR -->
         <div id="tab-ai" class="hidden space-y-6">
             <div class="bg-gradient-to-r from-indigo-900 to-indigo-700 text-white p-6 rounded-2xl shadow-lg space-y-2">
@@ -399,39 +393,40 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="bg-white dark:bg-slate-900 p-4 rounded-2xl border space-y-2">
                     <label class="block text-xs font-bold text-slate-500">1. Votre CV de base</label>
-                    <textarea id="base-cv" rows="5" class="w-full bg-slate-50 dark:bg-slate-800 border rounded-xl p-3 text-xs" placeholder="Ex: Développeur web..."></textarea>
+                    <textarea id="base-cv" rows="5" class="w-full bg-slate-50 dark:bg-slate-800 border rounded-xl p-3 text-xs text-slate-900 dark:text-slate-100 focus:outline-none" placeholder="Ex: Développeur web..."></textarea>
                 </div>
                 <div class="bg-white dark:bg-slate-900 p-4 rounded-2xl border space-y-2">
                     <label class="block text-xs font-bold text-slate-500">2. Description de l'offre d'emploi</label>
-                    <textarea id="job-desc" rows="5" class="w-full bg-slate-50 dark:bg-slate-800 border rounded-xl p-3 text-xs" placeholder="Collez l'offre ici..."></textarea>
+                    <textarea id="job-desc" rows="5" class="w-full bg-slate-50 dark:bg-slate-800 border rounded-xl p-3 text-xs text-slate-900 dark:text-slate-100 focus:outline-none" placeholder="Collez l'offre ici..."></textarea>
                 </div>
             </div>
-            <button onclick="runAiOptimization()" id="btn-optimize" class="w-full bg-indigo-600 text-white font-bold py-3.5 rounded-xl shadow-md">Générer le CV & la Lettre sur-mesure</button>
+            <button onclick="runAiOptimization()" id="btn-optimize" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3.5 rounded-xl shadow-md transition">Générer le CV & la Lettre sur-mesure</button>
             <div id="ai-result" class="hidden bg-white dark:bg-slate-900 p-6 rounded-2xl border shadow-md space-y-4">
                 <h3 class="font-bold text-lg text-emerald-600">Compatibilité : <span id="score-val">98%</span></h3>
                 <div id="tailored-cv-text" class="bg-slate-50 dark:bg-slate-950 p-4 rounded-xl text-xs font-mono whitespace-pre-line"></div>
+                <button onclick="showToast('Pack CV & Lettre téléchargé en PDF !')" class="bg-indigo-600 text-white text-xs font-bold px-4 py-2.5 rounded-xl">Télécharger le Pack PDF</button>
             </div>
         </div>
 
-        <!-- ONGLET : PITCH IA -->
-        <div id="tab-pitch" class="hidden space-y-6">
-            <div class="bg-gradient-to-r from-pink-950 to-rose-900 text-white p-6 rounded-2xl shadow-lg space-y-2">
-                <h2 class="text-xl font-bold">Générateur d'Elevator Pitch & Téléprompteur IA</h2>
-                <p class="text-sm text-pink-100">Générez un pitch vidéo de 30 secondes ultra-percutant.</p>
+        <!-- ONGLET : KANBAN -->
+        <div id="tab-kanban" class="hidden space-y-6">
+            <div class="bg-gradient-to-r from-indigo-900 via-blue-900 to-cyan-800 text-white p-6 rounded-2xl shadow-lg space-y-2">
+                <h2 class="text-xl font-bold">Kanban Visuel des Candidatures</h2>
+                <p class="text-sm text-cyan-100">Suivi en direct de vos démarches.</p>
             </div>
-            <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border shadow-sm space-y-4">
-                <button onclick="generatePitchScript()" class="bg-pink-600 text-white px-4 py-2 rounded-xl text-xs font-semibold">Générer le script pitch</button>
-                <div id="pitch-script-box" class="bg-slate-50 dark:bg-slate-950 p-4 rounded-xl text-xs font-mono">"Bonjour, je suis développeur Front-End..."</div>
-            </div>
-        </div>
-
-        <!-- ONGLET : GAP SKILLS -->
-        <div id="tab-skillsgap" class="hidden space-y-6">
-            <div class="bg-gradient-to-r from-amber-900 to-orange-800 text-white p-6 rounded-2xl shadow-lg space-y-2">
-                <h2 class="text-xl font-bold">Analyseur de Gap de Compétences & Roadmap</h2>
-            </div>
-            <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border shadow-sm space-y-3">
-                <p class="text-xs text-slate-600">Compétences manquantes détectées : Jest / React Testing Library, Zustand.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="bg-white dark:bg-slate-900 p-4 rounded-2xl border shadow-sm space-y-3">
+                    <h3 class="font-bold text-xs uppercase text-slate-500">À postuler</h3>
+                    <div class="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl text-xs font-semibold">Lead Front-End (Stripe)</div>
+                </div>
+                <div class="bg-white dark:bg-slate-900 p-4 rounded-2xl border shadow-sm space-y-3">
+                    <h3 class="font-bold text-xs uppercase text-indigo-600">En cours / Envoyé</h3>
+                    <div class="p-3 bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 rounded-xl text-xs font-semibold">Développeur React (NextGen)</div>
+                </div>
+                <div class="bg-white dark:bg-slate-900 p-4 rounded-2xl border shadow-sm space-y-3">
+                    <h3 class="font-bold text-xs uppercase text-emerald-600">Entretiens / Offres</h3>
+                    <div class="p-3 bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 rounded-xl text-xs font-semibold">ScaleUp Paris (Visio Jeudi)</div>
+                </div>
             </div>
         </div>
 
@@ -441,51 +436,28 @@
                 <h2 class="text-xl font-bold">Simulateur de Salaire & Négociation IA</h2>
             </div>
             <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border shadow-sm space-y-4">
-                <button onclick="calculateSalary()" class="w-full bg-emerald-600 text-white font-bold py-3 rounded-xl">Calculer l'estimation du marché</button>
-                <div id="salary-result" class="hidden p-4 bg-slate-50 dark:bg-slate-950 rounded-xl text-xs font-mono">Fourchette : 48 000 € - 58 000 € / an</div>
-            </div>
-        </div>
-
-        <!-- ONGLET : CERTIFICATIONS -->
-        <div id="tab-certifications" class="hidden space-y-6">
-            <div class="bg-gradient-to-r from-blue-900 to-indigo-800 text-white p-6 rounded-2xl shadow-lg space-y-2">
-                <h2 class="text-xl font-bold">Certifications & Badge Vérifié Pro</h2>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border shadow-sm space-y-4">
-                    <h4 class="font-bold">React & Tailwind Expert</h4>
-                    <button onclick="startCertification('React & Tailwind')" class="w-full bg-indigo-600 text-white py-2.5 rounded-xl text-xs">Passer la certification Pro</button>
+                <button onclick="calculateSalary()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl transition">Calculer l'estimation du marché</button>
+                <div id="salary-result" class="hidden p-4 bg-slate-50 dark:bg-slate-950 rounded-xl text-xs font-mono space-y-1">
+                    <p class="font-bold text-emerald-600">Fourchette estimée : 48 000 € - 58 000 € / an</p>
+                    <p class="text-slate-500">Arguments IA : Maîtrise React, autonomie et impact technique.</p>
                 </div>
-            </div>
-        </div>
-
-        <!-- ONGLET : COACH ENTRETIEN -->
-        <div id="tab-interview" class="hidden space-y-6">
-            <div class="bg-gradient-to-r from-purple-900 to-indigo-800 text-white p-6 rounded-2xl shadow-lg space-y-2">
-                <h2 class="text-xl font-bold">Simulateur d'Entretien par IA</h2>
-            </div>
-            <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border shadow-sm space-y-4">
-                <p id="interview-question" class="text-sm font-semibold">"Présentez un projet complexe en React..."</p>
-                <textarea id="interview-answer" rows="3" class="w-full bg-slate-50 dark:bg-slate-800 border rounded-xl p-3 text-xs" placeholder="Votre réponse..."></textarea>
-                <button onclick="submitInterviewAnswer()" class="w-full bg-purple-600 text-white font-bold py-2.5 rounded-xl text-xs">Soumettre pour analyse IA</button>
-                <div id="interview-feedback" class="hidden p-3 bg-purple-50 dark:bg-purple-950 rounded-xl text-xs">Feedback : Excellent !</div>
             </div>
         </div>
 
         <!-- ONGLET : CHAT -->
         <div id="tab-chat" class="hidden space-y-6">
             <div class="bg-white dark:bg-slate-900 rounded-2xl border shadow-sm flex flex-col md:flex-row h-[450px]">
-                <div class="w-full md:w-1/3 border-r p-4 bg-slate-50/50">
+                <div class="w-full md:w-1/3 border-r p-4 bg-slate-50/50 dark:bg-slate-900/50">
                     <h3 class="font-bold text-sm">Discussions directes (> 90%)</h3>
-                    <div class="mt-3 p-2 bg-white rounded-xl border text-xs font-semibold cursor-pointer">NextGen Tech (Sarah)</div>
+                    <div class="mt-3 p-3 bg-white dark:bg-slate-800 rounded-xl border text-xs font-semibold cursor-pointer shadow-sm">NextGen Tech (Sarah - RH)</div>
                 </div>
                 <div class="flex-1 flex flex-col p-4">
-                    <div id="chat-messages" class="flex-1 overflow-y-auto space-y-2 text-xs">
-                        <div class="bg-slate-100 dark:bg-slate-800 p-2.5 rounded-xl max-w-[80%]">Bonjour ! Seriez-vous disponible pour un échange ?</div>
+                    <div id="chat-messages" class="flex-1 overflow-y-auto space-y-3 text-xs">
+                        <div class="bg-slate-100 dark:bg-slate-800 p-3 rounded-2xl max-w-[80%]">Bonjour ! Votre profil matche parfaitement avec notre poste React (96%). Seriez-vous disponible cette semaine ?</div>
                     </div>
                     <div class="pt-3 flex space-x-2">
-                        <input type="text" id="chat-input" placeholder="Votre message..." class="flex-1 bg-slate-100 dark:bg-slate-800 rounded-xl px-3 py-2 text-xs">
-                        <button onclick="sendChatMessage()" class="bg-indigo-600 text-white px-4 py-2 rounded-xl text-xs">Envoyer</button>
+                        <input type="text" id="chat-input" onkeypress="if(event.key==='Enter')sendChatMessage()" placeholder="Votre message..." class="flex-1 bg-slate-100 dark:bg-slate-800 rounded-xl px-4 py-2 text-xs focus:outline-none text-slate-900 dark:text-slate-100">
+                        <button onclick="sendChatMessage()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-xl text-xs font-bold transition">Envoyer</button>
                     </div>
                 </div>
             </div>
@@ -493,37 +465,45 @@
 
         <!-- ONGLET : SUIVI -->
         <div id="tab-dashboard" class="hidden space-y-6">
-            <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border shadow-sm">
+            <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border shadow-sm space-y-4">
                 <h2 class="text-xl font-bold">Tableau de Bord & Suivi</h2>
-                <p class="text-xs text-slate-500 mt-1">Vos candidatures actives et scores de compatibilité.</p>
-            </div>
-        </div>
-
-        <!-- ONGLET : PROD -->
-        <div id="tab-prod" class="hidden space-y-6">
-            <div class="bg-gradient-to-r from-indigo-900 via-slate-900 to-cyan-900 text-white p-6 rounded-2xl shadow-lg space-y-2">
-                <h2 class="text-xl font-bold">Guide de Passage en Production</h2>
-            </div>
-            <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border shadow-sm space-y-2 text-xs">
-                <p>1. Clé API Gemini / OpenAI</p>
-                <p>2. Configuration OAuth2 France Travail</p>
-                <p>3. Base de données & Stripe</p>
+                <p class="text-xs text-slate-500">Vos candidatures actives et scores de compatibilité IA.</p>
+                <div class="p-4 bg-slate-50 dark:bg-slate-800 rounded-xl border flex items-center justify-between text-xs">
+                    <div>
+                        <span class="font-bold">Développeur Front-End React (NextGen Tech)</span>
+                        <p class="text-slate-500">Candidature envoyée • Match 96%</p>
+                    </div>
+                    <span class="bg-emerald-100 text-emerald-800 font-bold px-3 py-1 rounded-full">En attente entretien</span>
+                </div>
             </div>
         </div>
 
     </main>
 
-    <!-- MODAUX -->
-    <div id="paywall-modal" class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-slate-900 max-w-md w-full p-6 rounded-3xl shadow-2xl border text-center space-y-4">
-            <h3 class="text-xl font-extrabold">Passez à JobTalent Pro</h3>
-            <p class="text-xs text-slate-500">Débloquez les recruteurs, le badge vérifié et l'illimité.</p>
-            <button onclick="upgradeToPro()" class="w-full bg-indigo-600 text-white font-bold py-3 rounded-xl text-xs">Activer Pro (9,99€/mois)</button>
-            <button onclick="closePaywall()" class="w-full bg-slate-100 dark:bg-slate-800 text-xs py-2 rounded-xl">Fermer</button>
+    <!-- MODAL PRICING / PRO -->
+    <div id="pricing-modal" class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-900 max-w-lg w-full p-6 rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 text-center space-y-5">
+            <div class="w-14 h-14 bg-indigo-100 dark:bg-indigo-950 text-indigo-600 rounded-2xl flex items-center justify-center mx-auto shadow-inner">
+                <i data-lucide="crown" class="w-7 h-7"></i>
+            </div>
+            <h3 class="text-2xl font-extrabold">Passez à JobTalent Pro</h3>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                Débloquez tout le potentiel de la plateforme pour seulement <strong>9,99 € / mois</strong> :
+            </p>
+            <ul class="text-xs text-left space-y-2 bg-slate-50 dark:bg-slate-800/60 p-4 rounded-xl font-medium">
+                <li>🔍 <strong>Qui a consulté votre profil ?</strong> (Voir les recruteurs en direct)</li>
+                <li>🚀 <strong>Boost x5</strong> de visibilité de votre profil</li>
+                <li>✨ Optimisations de CV & Lettres <strong>illimitées</strong></li>
+                <li>🛡️ Badge officiel <strong>"Pro Vérifié"</strong></li>
+            </ul>
+            <div class="space-y-2 pt-2">
+                <button onclick="upgradeToPro()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3.5 rounded-xl shadow-lg transition">Activer JobTalent Pro (9,99€/mois)</button>
+                <button onclick="closePricingModal()" class="w-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-semibold py-2.5 rounded-xl text-xs">Plus tard</button>
+            </div>
         </div>
     </div>
 
-    <!-- SCRIPT JS COMPLET -->
+    <!-- SCRIPT JS INTERACTIF -->
     <script>
         let isRecruiterMode = false;
         let isProUser = false;
@@ -534,27 +514,40 @@
             if(!t) {
                 t = document.createElement('div');
                 t.id = 'toast';
-                t.className = 'fixed bottom-5 right-5 z-50 bg-slate-900 text-white px-4 py-2 rounded-xl text-xs font-bold transition-all';
+                t.className = 'fixed bottom-5 right-5 z-50 bg-slate-900 text-white px-4 py-3 rounded-2xl shadow-xl text-xs font-bold transition-all';
                 document.body.appendChild(t);
             }
             t.innerText = msg;
-            setTimeout(() => t.remove(), 3000);
+            setTimeout(() => { if(t) t.remove(); }, 3000);
         }
 
         function switchTab(tab) {
-            ['landing', 'feed', 'profile', 'ai', 'francetravail', 'pitch', 'skillsgap', 'salary', 'certifications', 'interview', 'kanban', 'career', 'chat', 'dashboard', 'prod'].forEach(t => {
+            ['landing', 'pricing', 'feed', 'profile', 'ai', 'francetravail', 'kanban', 'salary', 'chat', 'dashboard'].forEach(t => {
                 const el = document.getElementById('tab-' + t);
                 if(el) el.classList.add('hidden');
+                const btn = document.getElementById('btn-' + t);
+                if(btn) btn.className = "px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-indigo-600 transition flex items-center space-x-1.5 shrink-0";
             });
             const target = document.getElementById('tab-' + tab);
             if(target) target.classList.remove('hidden');
+            const targetBtn = document.getElementById('btn-' + tab);
+            if(targetBtn) targetBtn.className = "px-3 py-2 rounded-lg text-sm font-medium text-indigo-600 bg-indigo-50 dark:bg-indigo-950/50 transition flex items-center space-x-1.5 shrink-0";
+            
             lucide.createIcons();
             window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
+        function openPricingModal() {
+            document.getElementById('pricing-modal').classList.remove('hidden');
+        }
+
+        function closePricingModal() {
+            document.getElementById('pricing-modal').classList.add('hidden');
+        }
+
         async function fetchApiJobs() {
             const container = document.getElementById('api-results');
-            container.innerHTML = '<p class="text-xs text-slate-500 col-span-2 text-center py-6">Chargement des entreprises depuis l'API France Travail...</p>';
+            container.innerHTML = '<p class="text-xs text-slate-500 col-span-2 text-center py-6">Chargement des entreprises depuis l\'API France Travail...</p>';
             try {
                 const res = await fetch('/api/jobs');
                 const data = await res.json();
@@ -585,41 +578,61 @@
             isRecruiterMode = !isRecruiterMode;
             document.getElementById('role-badge').innerText = isRecruiterMode ? "Mode Recruteur" : "Candidat";
             document.getElementById('recruiter-mode-text').innerText = isRecruiterMode ? "Mode Candidat" : "Mode Recruteur";
-            showToast(isRecruiterMode ? "Mode Recruteur activé" : "Mode Candidat activé");
+            showToast(isRecruiterMode ? "Mode Recruteur B2B activé" : "Mode Candidat B2C activé");
         }
 
         function runAiOptimization() {
             if(!isProUser && freeCreditsLeft <= 0) {
-                document.getElementById('paywall-modal').classList.remove('hidden');
+                openPricingModal();
                 return;
             }
             document.getElementById('ai-result').classList.remove('hidden');
-            document.getElementById('tailored-cv-text').innerText = "[CV OPTIMISÉ PAR IA - MATCH 98%]\n• Mots-clés ATS intégrés.\n• Expériences reformulées.";
-            if(!isProUser) freeCreditsLeft--;
-            showToast("CV optimisé avec succès !");
+            document.getElementById('tailored-cv-text').innerText = "[CV OPTIMISÉ PAR IA - MATCH 98%]\n• Mots-clés ATS intégrés avec succès.\n• Expériences reformulées pour maximiser l'impact.";
+            if(!isProUser) {
+                freeCreditsLeft--;
+                const badge = document.getElementById('credits-badge');
+                if(badge) badge.innerText = freeCreditsLeft + " gratuites";
+            }
+            showToast("CV optimisé avec succès par l'IA !");
         }
 
         function upgradeToPro() {
             isProUser = true;
-            document.getElementById('paywall-modal').classList.add('hidden');
+            closePricingModal();
             document.getElementById('profile-verified-badge').classList.remove('hidden');
             document.getElementById('boost-status-banner').classList.remove('hidden');
             document.getElementById('visitors-locked').classList.add('hidden');
             document.getElementById('visitors-unlocked').classList.remove('hidden');
-            showToast("JobTalent Pro activé avec succès ! 🎉");
+            const badge = document.getElementById('credits-badge');
+            if(badge) badge.innerText = "Pro Illimité";
+            showToast("🎉 JobTalent Pro activé avec succès !");
         }
 
-        function closePaywall() {
-            document.getElementById('paywall-modal').classList.add('hidden');
+        function calculateSalary() {
+            document.getElementById('salary-result').classList.remove('hidden');
+            showToast("Estimation salariale calculée avec succès !");
         }
 
         function sendChatMessage() {
             const input = document.getElementById('chat-input');
             if(!input.value.trim()) return;
             const chat = document.getElementById('chat-messages');
-            chat.insertAdjacentHTML('beforeend', `<div class="bg-indigo-600 text-white p-2.5 rounded-xl max-w-[80%] ml-auto">${input.value}</div>`);
+            chat.insertAdjacentHTML('beforeend', `<div class="bg-indigo-600 text-white p-3 rounded-2xl max-w-[80%] ml-auto text-xs shadow-sm">${input.value}</div>`);
             input.value = '';
             chat.scrollTop = chat.scrollHeight;
+            setTimeout(() => {
+                chat.insertAdjacentHTML('beforeend', `<div class="bg-slate-100 dark:bg-slate-800 p-3 rounded-2xl max-w-[80%] text-xs shadow-sm">Merci pour votre message ! Je transmets à l'équipe de recrutement.</div>`);
+                chat.scrollTop = chat.scrollHeight;
+            }, 1000);
+        }
+
+        function createPost() {
+            const input = document.getElementById('post-input');
+            if(!input.value.trim()) return;
+            const list = document.getElementById('feed-list');
+            list.insertAdjacentHTML('afterbegin', `<div class="bg-white dark:bg-slate-900 p-4 rounded-2xl border shadow-sm text-xs space-y-1"><strong class="text-indigo-600">Vous</strong><p>${input.value}</p></div>`);
+            input.value = '';
+            showToast("Actualité publiée avec succès !");
         }
 
         window.addEventListener('DOMContentLoaded', () => {
@@ -629,3 +642,9 @@
     </script>
 </body>
 </html>
+"""
+
+with open('public/index.html', 'w', encoding='utf-8') as f:
+    f.write(html_content)
+
+print("public/index.html updated successfully.")

@@ -1,76 +1,77 @@
 const express = require('express');
-const cors = require('cors');
-require('dotenv').config();
-const { GoogleGenAI } = require('@google/genai');
+const axios = require('axios');
+const path = require('path');
 
 const app = express();
-app.use(express.static('public'));
-app.use(cors());
-app.use(express.json());
-
 const PORT = process.env.PORT || 3000;
 
-// Initialisation de l'IA Google Gemini
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+// Middleware pour parser le JSON et servir le dossier public
+app.use(express.json());
+app.use(express.static(path.join(__dirname, 'public')));
 
-// Route de test
-app.get('/', (req, res) => {
-    res.json({ status: "JobTalent Backend en ligne 🚀" });
-});
+// Variables d'environnement
+const CLIENT_ID = process.env.FRANCE_TRAVAIL_CLIENT_ID;
+const CLIENT_SECRET = process.env.FRANCE_TRAVAIL_CLIENT_SECRET;
 
-// Route sécurisée pour l'IA Tailor (Optimisation de CV)
-app.post('/api/tailor', async (req, res) => {
+// Fonction pour obtenir le token d'accès OAuth2 France Travail
+async function getAccessToken() {
     try {
-        const { cv, jobDescription } = req.body;
-        
-        const response = await ai.models.generateContent({
-            model: 'gemini-2.5-flash',
-            contents: `Agis en tant qu'expert RH. Adapte ce CV pour qu'il corresponde parfaitement à cette offre d'emploi :\n\nCV du candidat :\n${cv}\n\nOffre d'emploi :\n${jobDescription}`,
-        });
+        const params = new URLSearchParams();
+        params.append('grant_type', 'client_credentials');
+        params.append('client_id', CLIENT_ID);
+        params.append('client_secret', CLIENT_SECRET);
+        params.append('scope', 'api_labonneboitev2'); // Scope pour La Bonne Boite
 
-        res.json({ success: true, optimizedCv: response.text });
+        const response = await axios.post(
+            'https://entreprise.francetravail.fr/connexion/oauth2/access_token?realm=/partenaire',
+            params,
+            {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            }
+        );
+        return response.data.access_token;
     } catch (error) {
-        console.error("Erreur IA :", error);
-        res.status(500).json({ success: false, error: "Erreur lors de la génération par l'IA" });
+        console.error('Erreur lors de la récupération du token :', error.response?.data || error.message);
+        throw new Error('Impossible de s authentifier auprès de l API France Travail');
+    }
+}
+
+// Route API pour rechercher des entreprises qui recrutent via La Bonne Boite
+app.get('/api/jobs', async (req, res) => {
+    try {
+        const { what, where } = req.query;
+        const accessToken = await getAccessToken();
+
+        // Exemple de requête sur La Bonne Boite (autour d'une géolocalisation ou code ROME)
+        // Par défaut, on cherche des entreprises (ex: code ROME M1605 pour l'informatique ou paramètres par défaut)
+        const response = await axios.get(
+            'https://api.francetravail.io/partenaire/labonneboitev2/v1/rome',
+            {
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`
+                },
+                params: {
+                    rome_code: 'M1605', // Code ROME par défaut (ex: développement informatique)
+                    latitude: 48.8566,   // Paris par défaut (ou coordonnées basées sur 'where')
+                    longitude: 2.3522,
+                    distance: 30
+                }
+            }
+        );
+
+        res.json(response.data);
+    } catch (error) {
+        console.error('Erreur API La Bonne Boite :', error.response?.data || error.message);
+        res.status(500).json({ 
+            error: 'Erreur lors de la récupération des données',
+            details: error.response?.data || error.message 
+        });
     }
 });
 
+// Démarrage du serveur
 app.listen(PORT, () => {
     console.log(`Serveur démarré sur le port ${PORT}`);
-});
-
-// Fonction pour récupérer le token d'accès France Travail
-async function getFranceTravailToken() {
-  const params = new URLSearchParams();
-  params.append('grant_type', 'client_credentials');
-  params.append('client_id', process.env.FRANCE_TRAVAIL_CLIENT_ID);
-  params.append('client_secret', process.env.FRANCE_TRAVAIL_CLIENT_SECRET);
-  params.append('scope', 'api_offresdemploiv2 o2demploi');
-
-  const response = await fetch('https://entreprise.francetravail.fr/connexion/oauth2/access_token?realm=/partenaire', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: params
-  });
-
-  const data = await response.json();
-  return data.access_token;
-}
-
-// Route pour chercher des offres d'emploi
-app.get('/api/jobs', async (req, res) => {
-  try {
-    const keyword = req.query.keyword || 'developpeur';
-    const token = await getFranceTravailToken();
-
-    const response = await fetch(`https://api.francetravail.io/partenaire/offresdemploi/v2/offres/search?motsClefs=${keyword}`, {
-      headers: { 'Authorization': `Bearer ${token}` }
-    });
-
-    const jobs = await response.json();
-    res.json(jobs);
-  } catch (error) {
-    console.error("Erreur France Travail:", error);
-    res.status(500).json({ error: "Erreur lors de la récupération des offres" });
-  }
 });

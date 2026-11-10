@@ -55,31 +55,72 @@
                 </div>
             </div>
             
-            <nav class="hidden md:flex space-x-1">
-                <button onclick="switchTab('landing')" id="btn-landing" class="px-3 py-2 rounded-lg text-sm font-medium text-indigo-600 bg-indigo-50 dark:bg-indigo-950/50 transition flex items-center space-x-1.5">
+            <nav class="hidden md:flex space-x-1 overflow-x-auto py-1">
+                <button onclick="switchTab('landing')" id="btn-landing" class="px-3 py-2 rounded-lg text-sm font-medium text-indigo-600 bg-indigo-50 dark:bg-indigo-950/50 transition flex items-center space-x-1.5 shrink-0">
                     <i data-lucide="home" class="w-4 h-4"></i>
                     <span>Accueil</span>
                 </button>
-                <button onclick="switchTab('feed')" id="btn-feed" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-indigo-600 transition flex items-center space-x-1.5">
+                <button onclick="switchTab('feed')" id="btn-feed" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-indigo-600 transition flex items-center space-x-1.5 shrink-0">
                     <i data-lucide="newspaper" class="w-4 h-4"></i>
                     <span>Fil d'actu</span>
                 </button>
-                <button onclick="switchTab('profile')" id="btn-profile" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-indigo-600 transition flex items-center space-x-1.5">
+                <button onclick="switchTab('profile')" id="btn-profile" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-indigo-600 transition flex items-center space-x-1.5 shrink-0">
                     <i data-lucide="user" class="w-4 h-4"></i>
                     <span>Mon Profil</span>
                 </button>
-                <button onclick="switchTab('ai')" id="btn-ai" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-indigo-600 transition flex items-center space-x-1.5">
+                <button onclick="switchTab('ai')" id="btn-ai" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-indigo-600 transition flex items-center space-x-1.5 shrink-0">
                     <i data-lucide="wand-2" class="w-4 h-4"></i>
                     <span>IA Tailor</span>
                     <span id="credits-badge" class="ml-1 bg-indigo-600 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold">2 gratuites</span>
                 </button>
-                <button onclick="switchTab('francetravail')" id="btn-francetravail" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-indigo-600 transition flex items-center space-x-1.5">
+                <button onclick="switchTab('francetravail')" id="btn-francetravail" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-indigo-600 transition flex items-center space-x-1.5 shrink-0">
                     <i data-lucide="globe" class="w-4 h-4"></i>
-                    <span>Entreprises & API</span>
+                    <span>France Travail</span>
+                </button>
+                <button onclick="switchTab('pitch')" id="btn-pitch" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-indigo-600 transition flex items-center space-x-1.5 shrink-0">
+                    <i data-lucide="video" class="w-4 h-4"></i>
+                    <span>Pitch IA</span>
+                </button>
+                <button onclick="switchTab('skillsgap')" id="btn-skillsgap" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-indigo-600 transition flex items-center space-x-1.5 shrink-0">
+                    <i data-lucide="target" class="w-4 h-4"></i>
+                    <span>Gap Skills</span>
+                </button>
+                <button onclick="switchTab('salary')" id="btn-salary" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-indigo-600 transition flex items-center space-x-1.5 shrink-0">
+                    <i data-lucide="trending-up" class="w-4 h-4"></i>
+                    <span>Salaires</span>
+                </button>
+                <button onclick="switchTab('certifications')" id="btn-certifications" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-indigo-600 transition flex items-center space-x-1.5 shrink-0">
+                    <i data-lucide="award" class="w-4 h-4"></i>
+                    <span>Certifications</span>
+                </button>
+                <button onclick="switchTab('interview')" id="btn-interview" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-indigo-600 transition flex items-center space-x-1.5 shrink-0">
+                    <i data-lucide="mic" class="w-4 h-4"></i>
+                    <span>Coach Entretien</span>
+                </button>
+                <button onclick="switchTab('kanban')" id="btn-kanban" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-indigo-600 transition flex items-center space-x-1.5 shrink-0">
+                    <i data-lucide="kanban" class="w-4 h-4"></i>
+                    <span>Kanban</span>
+                </button>
+                <button onclick="switchTab('career')" id="btn-career" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-indigo-600 transition flex items-center space-x-1.5 shrink-0">
+                    <i data-lucide="compass" class="w-4 h-4"></i>
+                    <span>Carrière</span>
+                </button>
+                <button onclick="switchTab('chat')" id="btn-chat" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-indigo-600 transition flex items-center space-x-1.5 shrink-0 relative">
+                    <i data-lucide="message-square" class="w-4 h-4"></i>
+                    <span>Messages</span>
+                    <span class="absolute top-1 right-1 w-2 h-2 bg-emerald-500 rounded-full"></span>
+                </button>
+                <button onclick="switchTab('dashboard')" id="btn-dashboard" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-indigo-600 transition flex items-center space-x-1.5 shrink-0">
+                    <i data-lucide="briefcase" class="w-4 h-4"></i>
+                    <span>Suivi</span>
+                </button>
+                <button onclick="switchTab('prod')" id="btn-prod" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-indigo-600 transition flex items-center space-x-1.5 shrink-0">
+                    <i data-lucide="settings" class="w-4 h-4"></i>
+                    <span>Prod</span>
                 </button>
             </nav>
 
-            <div class="flex items-center space-x-2">
+            <div class="flex items-center space-x-2 shrink-0">
                 <button onclick="openReferralModal()" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800 hover:bg-indigo-100 transition flex items-center space-x-1">
                     <i data-lucide="gift" class="w-3.5 h-3.5"></i>
                     <span>Parrainer</span>
@@ -104,99 +145,416 @@
             <div class="text-center space-y-6 max-w-3xl mx-auto px-4">
                 <div class="inline-flex items-center space-x-2 bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 px-4 py-1.5 rounded-full text-xs font-bold border border-indigo-200 dark:border-indigo-800 shadow-sm">
                     <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
-                    <span>Propulsé par l'API France Travail & l'IA</span>
+                    <span>La révolution du recrutement sans CV classique</span>
                 </div>
                 <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
-                    Trouvez votre emploi et vos opportunités avec <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-indigo-600">JobTalent</span>.
+                    Le Réseau Pro où l'IA adapte ton CV <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-indigo-600">sur-mesure</span>.
                 </h1>
                 <p class="text-base text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
-                    Optimisez votre CV, explorez le marché caché des entreprises qui recrutent et postulez en toute simplicité.
+                    Fini les CV ignorés par les filtres ATS. Importez votre profil, laissez l'IA le cibler en 1 clic pour chaque offre et postulez directement auprès des meilleures entreprises.
                 </p>
                 <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
                     <button onclick="switchTab('ai')" class="w-full sm:w-auto bg-indigo-600 text-white font-bold px-8 py-3.5 rounded-2xl shadow-lg shadow-indigo-500/25 hover:bg-indigo-700 transition flex items-center justify-center space-x-2">
                         <i data-lucide="wand-2" class="w-4 h-4"></i>
-                        <span>Tester l'IA Tailor</span>
+                        <span>Tester l'IA Tailor gratuitement</span>
                     </button>
-                    <button onclick="switchTab('francetravail')" class="w-full sm:w-auto bg-white dark:bg-slate-900 text-slate-900 dark:text-white font-bold px-8 py-3.5 rounded-2xl border border-slate-300 dark:border-slate-700 hover:border-indigo-500 transition flex items-center justify-center space-x-2">
-                        <i data-lucide="globe" class="w-4 h-4"></i>
-                        <span>Explorer les entreprises partenaires</span>
+                    <button onclick="switchTab('feed')" class="w-full sm:w-auto bg-white dark:bg-slate-900 text-slate-900 dark:text-white font-bold px-8 py-3.5 rounded-2xl border border-slate-300 dark:border-slate-700 hover:border-indigo-500 transition flex items-center justify-center space-x-2">
+                        <i data-lucide="newspaper" class="w-4 h-4"></i>
+                        <span>Explorer les offres d'emploi</span>
                     </button>
+                </div>
+            </div>
+
+            <div class="bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl max-w-3xl mx-auto space-y-6">
+                <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                        <div class="w-3 h-3 rounded-full bg-amber-500"></div>
+                        <div class="w-3 h-3 rounded-full bg-emerald-500"></div>
+                        <span class="text-xs font-bold text-slate-400 ml-2">Démo Live - IA Tailor Simulator</span>
+                    </div>
+                    <span class="text-xs bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 font-bold px-3 py-1 rounded-full">Score Boost : +52%</span>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="bg-slate-50 dark:bg-slate-950 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-2">
+                        <label class="block text-xs font-bold text-slate-500">Votre profil brut :</label>
+                        <p class="text-xs text-slate-700 dark:text-slate-300 font-mono">"Développeur web, HTML, CSS, JavaScript, bases React."</p>
+                    </div>
+                    <div class="bg-slate-50 dark:bg-slate-950 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-2">
+                        <label class="block text-xs font-bold text-slate-500">Offre ciblée :</label>
+                        <p class="text-xs text-slate-700 dark:text-slate-300 font-mono">"Recherche expert React & Tailwind UI avec expérience agile."</p>
+                    </div>
+                </div>
+                <button onclick="switchTab('ai')" class="w-full bg-gradient-to-r from-cyan-500 to-indigo-600 text-white font-bold py-3.5 rounded-2xl shadow-md hover:opacity-95 transition flex items-center justify-center space-x-2">
+                    <i data-lucide="sparkles" class="w-4 h-4"></i>
+                    <span>Lancer la simulation en 1 clic (98% de match)</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- ONGLET : KANBAN -->
+        <div id="tab-kanban" class="hidden space-y-6">
+            <div class="bg-gradient-to-r from-indigo-900 via-blue-900 to-cyan-800 text-white p-6 rounded-2xl shadow-lg space-y-2">
+                <div class="flex items-center space-x-2">
+                    <i data-lucide="kanban" class="w-6 h-6 text-cyan-300"></i>
+                    <h2 class="text-xl font-bold">Kanban Visuel des Candidatures</h2>
+                </div>
+                <p class="text-sm text-cyan-100">Glissez ou déplacez vos candidatures à travers les différentes étapes de recrutement.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div class="bg-slate-100 dark:bg-slate-900/60 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-3">
+                    <div class="flex items-center justify-between font-bold text-xs uppercase text-slate-500">
+                        <span>À postuler (2)</span>
+                        <span class="w-2 h-2 rounded-full bg-slate-400"></span>
+                    </div>
+                    <div class="space-y-2" id="kanban-col-1">
+                        <div class="bg-white dark:bg-slate-900 p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-2">
+                            <h4 class="font-bold text-xs">Lead Front-End React</h4>
+                            <p class="text-[11px] text-slate-500">Stripe • Remote</p>
+                            <button onclick="moveKanbanCard(this, 'col-2')" class="text-[10px] bg-indigo-50 dark:bg-indigo-950 text-indigo-600 font-semibold px-2.5 py-1 rounded-lg w-full">Déplacer vers Envoyé →</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-slate-100 dark:bg-slate-900/60 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-3">
+                    <div class="flex items-center justify-between font-bold text-xs uppercase text-indigo-600">
+                        <span>Envoyé (1)</span>
+                        <span class="w-2 h-2 rounded-full bg-indigo-500"></span>
+                    </div>
+                    <div class="space-y-2" id="kanban-col-2">
+                        <div class="bg-white dark:bg-slate-900 p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-2">
+                            <h4 class="font-bold text-xs">Développeur Front-End</h4>
+                            <p class="text-[11px] text-slate-500">NextGen Tech • Match 96%</p>
+                            <button onclick="moveKanbanCard(this, 'col-3')" class="text-[10px] bg-indigo-50 dark:bg-indigo-950 text-indigo-600 font-semibold px-2.5 py-1 rounded-lg w-full">Déplacer vers Entretien →</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-slate-100 dark:bg-slate-900/60 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-3">
+                    <div class="flex items-center justify-between font-bold text-xs uppercase text-purple-600">
+                        <span>Entretien (1)</span>
+                        <span class="w-2 h-2 rounded-full bg-purple-500"></span>
+                    </div>
+                    <div class="space-y-2" id="kanban-col-3">
+                        <div class="bg-white dark:bg-slate-900 p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-2">
+                            <h4 class="font-bold text-xs">React UI Engineer</h4>
+                            <p class="text-[11px] text-slate-500">ScaleUp Paris • Visio Jeudi</p>
+                            <button onclick="moveKanbanCard(this, 'col-4')" class="text-[10px] bg-emerald-50 dark:bg-emerald-950 text-emerald-600 font-semibold px-2.5 py-1 rounded-lg w-full">Déplacer vers Offre 🎉</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-slate-100 dark:bg-slate-900/60 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-3">
+                    <div class="flex items-center justify-between font-bold text-xs uppercase text-emerald-600">
+                        <span>Offre reçue (0)</span>
+                        <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                    </div>
+                    <div class="space-y-2" id="kanban-col-4">
+                        <p class="text-[11px] text-slate-400 text-center py-6 italic">Glissez vos réussites ici !</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ONGLET : CARRIÈRE -->
+        <div id="tab-career" class="hidden space-y-6">
+            <div class="bg-gradient-to-r from-teal-900 to-emerald-800 text-white p-6 rounded-2xl shadow-lg space-y-2">
+                <div class="flex items-center space-x-2">
+                    <i data-lucide="compass" class="w-6 h-6 text-teal-300"></i>
+                    <h2 class="text-xl font-bold">Conseiller d'Orientation & Carrière IA</h2>
+                </div>
+                <p class="text-sm text-teal-100">Découvrez les évolutions de carrière recommandées par l'IA.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+                    <span class="text-xs bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 font-bold px-3 py-1 rounded-full">Match 98%</span>
+                    <h3 class="font-bold text-base">Lead Front-End Architect</h3>
+                    <p class="text-xs text-slate-600 dark:text-slate-400">Passez sur un rôle de lead technique en encadrant des équipes dev.</p>
+                    <button onclick="showToast('Roadmap Lead Architect activée !')" class="w-full bg-emerald-600 text-white font-semibold py-2.5 rounded-xl text-xs">Explorer cette voie</button>
+                </div>
+                <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+                    <span class="text-xs bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 font-bold px-3 py-1 rounded-full">Match 92%</span>
+                    <h3 class="font-bold text-base">Product Engineer / UI-UX Expert</h3>
+                    <p class="text-xs text-slate-600 dark:text-slate-400">Combine front-end et design d'interface.</p>
+                    <button onclick="showToast('Roadmap Product Engineer activée !')" class="w-full bg-indigo-600 text-white font-semibold py-2.5 rounded-xl text-xs">Explorer cette voie</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ONGLET : PROFIL -->
+        <div id="tab-profile" class="hidden space-y-6">
+            <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+                <div class="h-32 bg-gradient-to-r from-indigo-600 via-cyan-500 to-blue-700 relative"></div>
+                <div class="px-6 pb-6 relative pt-4 space-y-4">
+                    <div class="flex flex-col sm:flex-row sm:items-end justify-between -mt-16 gap-4">
+                        <div class="flex items-end space-x-4">
+                            <div id="profile-avatar-initials" class="w-24 h-24 bg-indigo-600 text-white font-extrabold rounded-2xl border-4 border-white dark:border-slate-900 flex items-center justify-center text-2xl shadow-lg">VO</div>
+                            <div class="mb-1">
+                                <div class="flex items-center space-x-2">
+                                    <h2 id="display-profile-name" class="text-xl font-extrabold">Alexandre Martin</h2>
+                                    <span id="profile-verified-badge" class="hidden inline-flex items-center space-x-1 bg-indigo-50 text-indigo-600 text-xs font-bold px-2 py-0.5 rounded-full border border-indigo-200">
+                                        <i data-lucide="shield-check" class="w-3 h-3"></i><span>Pro Vérifié</span>
+                                    </span>
+                                </div>
+                                <p id="display-profile-headline" class="text-xs text-slate-500">Développeur Front-End React | Passionné d'UI/UX & IA</p>
+                                <p id="display-profile-location" class="text-[11px] text-slate-400 mt-0.5">📍 Paris, France • Ouvert aux opportunités</p>
+                            </div>
+                        </div>
+                        <button onclick="openEditProfileModal()" class="bg-indigo-600 text-white font-semibold px-4 py-2 rounded-xl text-xs hover:bg-indigo-700 transition">Modifier le profil</button>
+                    </div>
+
+                    <div id="boost-status-banner" class="hidden bg-gradient-to-r from-amber-500/10 to-indigo-500/10 border border-amber-500/30 p-3 rounded-xl flex items-center justify-between text-xs">
+                        <div class="flex items-center space-x-2">
+                            <i data-lucide="zap" class="w-4 h-4 text-amber-500"></i>
+                            <span class="font-bold">🚀 Boost de visibilité x5 actif auprès des recruteurs</span>
+                        </div>
+                        <span class="text-amber-600 font-semibold">Prioritaire</span>
+                    </div>
+
+                    <div class="pt-4 border-t border-slate-100 dark:border-slate-800 space-y-3">
+                        <h3 class="font-bold text-sm">À propos</h3>
+                        <p id="display-profile-bio" class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">Développeur web passionné avec 3 ans d'expérience.</p>
+                    </div>
+
+                    <div class="pt-4 border-t border-slate-100 dark:border-slate-800 space-y-3">
+                        <h3 class="font-bold text-sm">Qui a consulté votre profil ?</h3>
+                        <div id="visitors-locked" class="bg-slate-50 dark:bg-slate-900/60 p-4 rounded-xl border text-center space-y-2">
+                            <p class="text-xs">🔒 <strong>4 recruteurs</strong> ont consulté votre profil cette semaine.</p>
+                            <button onclick="document.getElementById('paywall-modal').classList.remove('hidden')" class="text-xs bg-indigo-600 text-white font-bold px-4 py-2 rounded-xl">Passer à JobTalent Pro</button>
+                        </div>
+                        <div id="visitors-unlocked" class="hidden space-y-2">
+                            <div class="bg-slate-50 dark:bg-slate-950 p-3 rounded-xl border flex items-center justify-between text-xs">
+                                <div><span class="font-bold">Sarah (RH - NextGen Tech)</span><p class="text-[10px] text-slate-400">A consulté votre CV complet</p></div>
+                                <span class="text-[10px] text-slate-400">Il y a 12 min</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 border-t border-slate-100 dark:border-slate-800 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-bold text-sm">Compétences validées par l'IA</h3>
+                            <button onclick="extractSkillsFromBackground()" class="text-xs bg-indigo-50 text-indigo-600 px-3 py-1.5 rounded-xl font-semibold border">Extraire de mon parcours</button>
+                        </div>
+                        <div id="profile-skills-container" class="flex flex-wrap gap-2">
+                            <span class="bg-indigo-50 text-indigo-700 text-xs font-semibold px-3 py-1 rounded-xl border">React.js</span>
+                            <span class="bg-indigo-50 text-indigo-700 text-xs font-semibold px-3 py-1 rounded-xl border">Tailwind CSS</span>
+                            <span class="bg-indigo-50 text-indigo-700 text-xs font-semibold px-3 py-1 rounded-xl border">JavaScript</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- ONGLET : FIL D'ACTU -->
         <div id="tab-feed" class="hidden space-y-6">
-            <div class="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
+            <div class="bg-white dark:bg-slate-900 p-4 rounded-2xl border shadow-sm space-y-3">
                 <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold text-sm shadow-md">VO</div>
-                    <input type="text" id="post-input" placeholder="Partager une actualité pro ou une recherche..." class="flex-1 bg-slate-100 dark:bg-slate-800 border-none rounded-xl px-4 py-2.5 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-900 dark:text-slate-100">
+                    <div class="w-10 h-10 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold text-sm">VO</div>
+                    <input type="text" id="post-input" placeholder="Partager une actualité pro..." class="flex-1 bg-slate-100 dark:bg-slate-800 border-none rounded-xl px-4 py-2.5 text-xs">
                 </div>
-                <div class="flex justify-between items-center pt-2 border-t border-slate-100 dark:border-slate-800">
-                    <span class="text-xs text-indigo-600 dark:text-indigo-400 font-semibold">2 optimisations gratuites restantes</span>
-                    <button onclick="createPost()" class="bg-indigo-600 text-white px-4 py-2 rounded-xl text-xs font-semibold shadow-sm hover:bg-indigo-700 transition">Publier</button>
+                <div class="flex justify-between items-center pt-2 border-t">
+                    <span id="ai-credits-banner" class="text-xs text-indigo-600 font-semibold">2 optimisations gratuites restantes</span>
+                    <button onclick="createPost()" class="bg-indigo-600 text-white px-4 py-2 rounded-xl text-xs font-semibold">Publier</button>
                 </div>
             </div>
-            <div class="space-y-4" id="feed-list"></div>
+            <div class="space-y-4" id="feed-list">
+                <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border shadow-sm space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-emerald-100 text-emerald-700 font-bold rounded-xl flex items-center justify-center">NX</div>
+                            <div><h3 class="font-bold">NextGen Tech</h3><p class="text-xs text-slate-500">Publié il y a 2 heures • 🌍 Remote</p></div>
+                        </div>
+                        <span class="bg-emerald-50 text-emerald-700 text-xs font-semibold px-2.5 py-1 rounded-full">CDI</span>
+                    </div>
+                    <h4 class="font-bold text-base">Développeur Front-End React / Vue.js H/F</h4>
+                    <p class="text-xs text-slate-600 dark:text-slate-400">Nous recherchons un passionné pour rejoindre notre équipe produit.</p>
+                    <div class="flex items-center justify-between pt-2 border-t">
+                        <span class="text-xs font-medium text-slate-500">Salaire : 45k€ - 55k€</span>
+                        <button onclick="quickApply('Développeur Front-End', 'Recherche expert React, Tailwind...')" class="bg-slate-900 text-white px-4 py-2 rounded-xl text-xs font-semibold">Postuler avec l'IA Tailor</button>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <!-- ONGLET : ENTREPRISES & API FRANCE TRAVAIL -->
+        <!-- ONGLET : FRANCE TRAVAIL & ENTREPRISES -->
         <div id="tab-francetravail" class="hidden space-y-6">
             <div class="bg-gradient-to-r from-blue-900 to-cyan-800 text-white p-6 rounded-2xl shadow-lg space-y-2">
                 <div class="flex items-center space-x-2">
                     <i data-lucide="globe" class="w-6 h-6 text-cyan-300"></i>
-                    <h2 class="text-xl font-bold">Entreprises Partenaires (La Bonne Boite)</h2>
+                    <h2 class="text-xl font-bold">Flux API France Travail & Entreprises</h2>
                 </div>
-                <p class="text-sm text-cyan-100">Données récupérées directement en temps réel depuis l'API sécurisée France Travail.</p>
+                <p class="text-sm text-cyan-100">Interrogez les données en temps réel de votre backend connecté à La Bonne Boite.</p>
             </div>
-
-            <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm text-center">
+            <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border shadow-sm text-center space-y-4">
                 <button onclick="fetchApiJobs()" id="btn-fetch-api" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-xl transition shadow-sm">
-                    🔍 Charger les entreprises depuis le serveur
+                    🔍 Charger les entreprises depuis l'API France Travail
                 </button>
             </div>
-
             <div id="api-results" class="grid gap-4 md:grid-cols-2"></div>
-        </div>
-
-        <!-- ONGLET : MON PROFIL -->
-        <div id="tab-profile" class="hidden space-y-6">
-            <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm p-6 space-y-4">
-                <h2 class="text-xl font-bold">Mon Profil Professionnel</h2>
-                <p class="text-xs text-slate-500">Gérez vos informations et compétences validées.</p>
-            </div>
         </div>
 
         <!-- ONGLET : IA TAILOR -->
         <div id="tab-ai" class="hidden space-y-6">
             <div class="bg-gradient-to-r from-indigo-900 to-indigo-700 text-white p-6 rounded-2xl shadow-lg space-y-2">
-                <h2 class="text-xl font-bold">✨ Optimiseur de CV par IA</h2>
-                <p class="text-sm text-indigo-100">Adaptez votre CV sur-mesure pour chaque offre.</p>
+                <h2 class="text-xl font-bold">✨ Optimiseur de CV & Lettre par IA</h2>
+                <p class="text-sm text-indigo-100">Collez votre CV et l'offre pour générer un contenu ATS sur-mesure.</p>
             </div>
-            <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
-                <textarea id="base-cv" rows="4" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-3 text-xs" placeholder="Collez votre CV de base ici..."></textarea>
-                <button onclick="runAiOptimization()" class="bg-indigo-600 text-white font-bold py-3 px-6 rounded-xl text-xs">Générer le CV optimisé</button>
-                <div id="ai-result" class="hidden p-4 bg-slate-50 dark:bg-slate-950 rounded-xl text-xs font-mono"></div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-white dark:bg-slate-900 p-4 rounded-2xl border space-y-2">
+                    <label class="block text-xs font-bold text-slate-500">1. Votre CV de base</label>
+                    <textarea id="base-cv" rows="5" class="w-full bg-slate-50 dark:bg-slate-800 border rounded-xl p-3 text-xs" placeholder="Ex: Développeur web..."></textarea>
+                </div>
+                <div class="bg-white dark:bg-slate-900 p-4 rounded-2xl border space-y-2">
+                    <label class="block text-xs font-bold text-slate-500">2. Description de l'offre d'emploi</label>
+                    <textarea id="job-desc" rows="5" class="w-full bg-slate-50 dark:bg-slate-800 border rounded-xl p-3 text-xs" placeholder="Collez l'offre ici..."></textarea>
+                </div>
+            </div>
+            <button onclick="runAiOptimization()" id="btn-optimize" class="w-full bg-indigo-600 text-white font-bold py-3.5 rounded-xl shadow-md">Générer le CV & la Lettre sur-mesure</button>
+            <div id="ai-result" class="hidden bg-white dark:bg-slate-900 p-6 rounded-2xl border shadow-md space-y-4">
+                <h3 class="font-bold text-lg text-emerald-600">Compatibilité : <span id="score-val">98%</span></h3>
+                <div id="tailored-cv-text" class="bg-slate-50 dark:bg-slate-950 p-4 rounded-xl text-xs font-mono whitespace-pre-line"></div>
+            </div>
+        </div>
+
+        <!-- ONGLET : PITCH IA -->
+        <div id="tab-pitch" class="hidden space-y-6">
+            <div class="bg-gradient-to-r from-pink-950 to-rose-900 text-white p-6 rounded-2xl shadow-lg space-y-2">
+                <h2 class="text-xl font-bold">Générateur d'Elevator Pitch & Téléprompteur IA</h2>
+                <p class="text-sm text-pink-100">Générez un pitch vidéo de 30 secondes ultra-percutant.</p>
+            </div>
+            <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border shadow-sm space-y-4">
+                <button onclick="generatePitchScript()" class="bg-pink-600 text-white px-4 py-2 rounded-xl text-xs font-semibold">Générer le script pitch</button>
+                <div id="pitch-script-box" class="bg-slate-50 dark:bg-slate-950 p-4 rounded-xl text-xs font-mono">"Bonjour, je suis développeur Front-End..."</div>
+            </div>
+        </div>
+
+        <!-- ONGLET : GAP SKILLS -->
+        <div id="tab-skillsgap" class="hidden space-y-6">
+            <div class="bg-gradient-to-r from-amber-900 to-orange-800 text-white p-6 rounded-2xl shadow-lg space-y-2">
+                <h2 class="text-xl font-bold">Analyseur de Gap de Compétences & Roadmap</h2>
+            </div>
+            <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border shadow-sm space-y-3">
+                <p class="text-xs text-slate-600">Compétences manquantes détectées : Jest / React Testing Library, Zustand.</p>
+            </div>
+        </div>
+
+        <!-- ONGLET : SALAIRES -->
+        <div id="tab-salary" class="hidden space-y-6">
+            <div class="bg-gradient-to-r from-emerald-900 to-teal-800 text-white p-6 rounded-2xl shadow-lg space-y-2">
+                <h2 class="text-xl font-bold">Simulateur de Salaire & Négociation IA</h2>
+            </div>
+            <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border shadow-sm space-y-4">
+                <button onclick="calculateSalary()" class="w-full bg-emerald-600 text-white font-bold py-3 rounded-xl">Calculer l'estimation du marché</button>
+                <div id="salary-result" class="hidden p-4 bg-slate-50 dark:bg-slate-950 rounded-xl text-xs font-mono">Fourchette : 48 000 € - 58 000 € / an</div>
+            </div>
+        </div>
+
+        <!-- ONGLET : CERTIFICATIONS -->
+        <div id="tab-certifications" class="hidden space-y-6">
+            <div class="bg-gradient-to-r from-blue-900 to-indigo-800 text-white p-6 rounded-2xl shadow-lg space-y-2">
+                <h2 class="text-xl font-bold">Certifications & Badge Vérifié Pro</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border shadow-sm space-y-4">
+                    <h4 class="font-bold">React & Tailwind Expert</h4>
+                    <button onclick="startCertification('React & Tailwind')" class="w-full bg-indigo-600 text-white py-2.5 rounded-xl text-xs">Passer la certification Pro</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ONGLET : COACH ENTRETIEN -->
+        <div id="tab-interview" class="hidden space-y-6">
+            <div class="bg-gradient-to-r from-purple-900 to-indigo-800 text-white p-6 rounded-2xl shadow-lg space-y-2">
+                <h2 class="text-xl font-bold">Simulateur d'Entretien par IA</h2>
+            </div>
+            <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border shadow-sm space-y-4">
+                <p id="interview-question" class="text-sm font-semibold">"Présentez un projet complexe en React..."</p>
+                <textarea id="interview-answer" rows="3" class="w-full bg-slate-50 dark:bg-slate-800 border rounded-xl p-3 text-xs" placeholder="Votre réponse..."></textarea>
+                <button onclick="submitInterviewAnswer()" class="w-full bg-purple-600 text-white font-bold py-2.5 rounded-xl text-xs">Soumettre pour analyse IA</button>
+                <div id="interview-feedback" class="hidden p-3 bg-purple-50 dark:bg-purple-950 rounded-xl text-xs">Feedback : Excellent !</div>
+            </div>
+        </div>
+
+        <!-- ONGLET : CHAT -->
+        <div id="tab-chat" class="hidden space-y-6">
+            <div class="bg-white dark:bg-slate-900 rounded-2xl border shadow-sm flex flex-col md:flex-row h-[450px]">
+                <div class="w-full md:w-1/3 border-r p-4 bg-slate-50/50">
+                    <h3 class="font-bold text-sm">Discussions directes (> 90%)</h3>
+                    <div class="mt-3 p-2 bg-white rounded-xl border text-xs font-semibold cursor-pointer">NextGen Tech (Sarah)</div>
+                </div>
+                <div class="flex-1 flex flex-col p-4">
+                    <div id="chat-messages" class="flex-1 overflow-y-auto space-y-2 text-xs">
+                        <div class="bg-slate-100 dark:bg-slate-800 p-2.5 rounded-xl max-w-[80%]">Bonjour ! Seriez-vous disponible pour un échange ?</div>
+                    </div>
+                    <div class="pt-3 flex space-x-2">
+                        <input type="text" id="chat-input" placeholder="Votre message..." class="flex-1 bg-slate-100 dark:bg-slate-800 rounded-xl px-3 py-2 text-xs">
+                        <button onclick="sendChatMessage()" class="bg-indigo-600 text-white px-4 py-2 rounded-xl text-xs">Envoyer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ONGLET : SUIVI -->
+        <div id="tab-dashboard" class="hidden space-y-6">
+            <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border shadow-sm">
+                <h2 class="text-xl font-bold">Tableau de Bord & Suivi</h2>
+                <p class="text-xs text-slate-500 mt-1">Vos candidatures actives et scores de compatibilité.</p>
+            </div>
+        </div>
+
+        <!-- ONGLET : PROD -->
+        <div id="tab-prod" class="hidden space-y-6">
+            <div class="bg-gradient-to-r from-indigo-900 via-slate-900 to-cyan-900 text-white p-6 rounded-2xl shadow-lg space-y-2">
+                <h2 class="text-xl font-bold">Guide de Passage en Production</h2>
+            </div>
+            <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border shadow-sm space-y-2 text-xs">
+                <p>1. Clé API Gemini / OpenAI</p>
+                <p>2. Configuration OAuth2 France Travail</p>
+                <p>3. Base de données & Stripe</p>
             </div>
         </div>
 
     </main>
 
-    <!-- SCRIPT JS -->
+    <!-- MODAUX -->
+    <div id="paywall-modal" class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-900 max-w-md w-full p-6 rounded-3xl shadow-2xl border text-center space-y-4">
+            <h3 class="text-xl font-extrabold">Passez à JobTalent Pro</h3>
+            <p class="text-xs text-slate-500">Débloquez les recruteurs, le badge vérifié et l'illimité.</p>
+            <button onclick="upgradeToPro()" class="w-full bg-indigo-600 text-white font-bold py-3 rounded-xl text-xs">Activer Pro (9,99€/mois)</button>
+            <button onclick="closePaywall()" class="w-full bg-slate-100 dark:bg-slate-800 text-xs py-2 rounded-xl">Fermer</button>
+        </div>
+    </div>
+
+    <!-- SCRIPT JS COMPLET -->
     <script>
-        function switchTab(tabName) {
-            ['landing', 'feed', 'profile', 'ai', 'francetravail'].forEach(t => {
+        let isRecruiterMode = false;
+        let isProUser = false;
+        let freeCreditsLeft = 2;
+
+        function showToast(msg) {
+            let t = document.getElementById('toast');
+            if(!t) {
+                t = document.createElement('div');
+                t.id = 'toast';
+                t.className = 'fixed bottom-5 right-5 z-50 bg-slate-900 text-white px-4 py-2 rounded-xl text-xs font-bold transition-all';
+                document.body.appendChild(t);
+            }
+            t.innerText = msg;
+            setTimeout(() => t.remove(), 3000);
+        }
+
+        function switchTab(tab) {
+            ['landing', 'feed', 'profile', 'ai', 'francetravail', 'pitch', 'skillsgap', 'salary', 'certifications', 'interview', 'kanban', 'career', 'chat', 'dashboard', 'prod'].forEach(t => {
                 const el = document.getElementById('tab-' + t);
                 if(el) el.classList.add('hidden');
             });
-            const target = document.getElementById('tab-' + tabName);
+            const target = document.getElementById('tab-' + tab);
             if(target) target.classList.remove('hidden');
             lucide.createIcons();
+            window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
         async function fetchApiJobs() {
             const container = document.getElementById('api-results');
-            container.innerHTML = '<p class="text-xs text-slate-500 col-span-2 text-center py-6">Chargement des données API...</p>';
+            container.innerHTML = '<p class="text-xs text-slate-500 col-span-2 text-center py-6">Chargement des entreprises depuis l'API France Travail...</p>';
             try {
                 const res = await fetch('/api/jobs');
                 const data = await res.json();
@@ -208,29 +566,60 @@
                 }
                 items.forEach(item => {
                     const card = document.createElement('div');
-                    card.className = 'bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm';
+                    card.className = 'bg-white dark:bg-slate-900 p-5 rounded-2xl border shadow-sm';
                     const name = item.name || item.enseigne || item.raison_sociale || "Entreprise partenaire";
                     const city = item.city || item.ville || "Localisation non précisée";
                     card.innerHTML = `<h3 class="font-bold text-sm text-indigo-600 mb-1">${name}</h3><p class="text-xs text-slate-500">📍 ${city}</p>`;
                     container.appendChild(card);
                 });
             } catch(e) {
-                container.innerHTML = '<p class="text-xs text-red-500 col-span-2 text-center">Erreur lors de la récupération des données de l\'API.</p>';
+                container.innerHTML = '<p class="text-xs text-red-500 col-span-2 text-center">Erreur lors de la récupération des données API.</p>';
             }
         }
 
-        function createPost() {
-            const text = document.getElementById('post-input').value.trim();
-            if(!text) return;
-            const list = document.getElementById('feed-list');
-            list.insertAdjacentHTML('afterbegin', `<div class="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm text-xs"><strong class="text-indigo-600">Vous</strong><p class="mt-1">${text}</p></div>`);
-            document.getElementById('post-input').value = '';
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+        }
+
+        function toggleRecruiterMode() {
+            isRecruiterMode = !isRecruiterMode;
+            document.getElementById('role-badge').innerText = isRecruiterMode ? "Mode Recruteur" : "Candidat";
+            document.getElementById('recruiter-mode-text').innerText = isRecruiterMode ? "Mode Candidat" : "Mode Recruteur";
+            showToast(isRecruiterMode ? "Mode Recruteur activé" : "Mode Candidat activé");
         }
 
         function runAiOptimization() {
-            const res = document.getElementById('ai-result');
-            res.classList.remove('hidden');
-            res.innerText = "[CV OPTIMISÉ PAR IA]\n• Mots-clés ATS intégrés avec succès.\n• Compétences alignées sur le marché.";
+            if(!isProUser && freeCreditsLeft <= 0) {
+                document.getElementById('paywall-modal').classList.remove('hidden');
+                return;
+            }
+            document.getElementById('ai-result').classList.remove('hidden');
+            document.getElementById('tailored-cv-text').innerText = "[CV OPTIMISÉ PAR IA - MATCH 98%]\n• Mots-clés ATS intégrés.\n• Expériences reformulées.";
+            if(!isProUser) freeCreditsLeft--;
+            showToast("CV optimisé avec succès !");
+        }
+
+        function upgradeToPro() {
+            isProUser = true;
+            document.getElementById('paywall-modal').classList.add('hidden');
+            document.getElementById('profile-verified-badge').classList.remove('hidden');
+            document.getElementById('boost-status-banner').classList.remove('hidden');
+            document.getElementById('visitors-locked').classList.add('hidden');
+            document.getElementById('visitors-unlocked').classList.remove('hidden');
+            showToast("JobTalent Pro activé avec succès ! 🎉");
+        }
+
+        function closePaywall() {
+            document.getElementById('paywall-modal').classList.add('hidden');
+        }
+
+        function sendChatMessage() {
+            const input = document.getElementById('chat-input');
+            if(!input.value.trim()) return;
+            const chat = document.getElementById('chat-messages');
+            chat.insertAdjacentHTML('beforeend', `<div class="bg-indigo-600 text-white p-2.5 rounded-xl max-w-[80%] ml-auto">${input.value}</div>`);
+            input.value = '';
+            chat.scrollTop = chat.scrollHeight;
         }
 
         window.addEventListener('DOMContentLoaded', () => {

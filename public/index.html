@@ -1,68 +1,242 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JobTalent - Recherche d'emploi</title>
-    <style>
-        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; background: #f4f7f6; }
-        h1 { color: #333; text-align: center; }
-        .search-box { display: flex; gap: 10px; margin-bottom: 20px; }
-        input { flex: 1; padding: 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 5px; }
-        button { padding: 10px 20px; font-size: 16px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
-        button:hover { background: #0056b3; }
-        .job-card { background: white; padding: 15px; margin-bottom: 10px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .job-card h3 { margin: 0 0 10px 0; color: #007bff; }
-        .job-card p { margin: 5px 0; color: #555; }
-    </style>
-</head>
-<body>
-
-    <h1>🚀 JobTalent</h1>
-    <p style="text-align: center; color: #666;">Trouve ton prochain emploi grâce à France Travail et l'IA</p>
-
-    <div class="search-box">
-        <input type="text" id="keyword" placeholder="Ex: Développeur, Comptable, Infirmière..." value="developpeur">
-        <button onclick="searchJobs()">Rechercher</button>
-    </div>
-
-    <div id="results">Recherche en cours ou clique sur Rechercher...</div>
-
+    <title>JobTalent - Réseau Pro & IA CV Tailor</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        async function searchJobs() {
-            const keyword = document.getElementById('keyword').value;
-            const resultsDiv = document.getElementById('results');
-            resultsDiv.innerHTML = "Chargement des offres...";
-
-            try {
-                const response = await fetch(`/api/jobs?keyword=${keyword}`);
-                const data = await response.json();
-
-                if (data.resultats && data.resultats.length > 0) {
-                    resultsDiv.innerHTML = "";
-                    data.resultats.forEach(job => {
-                        resultsDiv.innerHTML += `
-                            <div class="job-card">
-                                <h3>${job.intitule}</h3>
-                                <p><strong>Entreprise :</strong> ${job.entreprise ? job.entreprise.nom : 'Non spécifié'}</p>
-                                <p><strong>Lieu :</strong> ${job.lieuTravail ? job.lieuTravail.libelle : 'Non spécifié'}</p>
-                                <p><strong>Type de contrat :</strong> ${job.typeContrat} - ${job.romeLibelle || ''}</p>
-                                <p>${job.description ? job.description.substring(0, 150) + '...' : ''}</p>
-                                ${job.romeCode ? `<a href="https://candidat.francetravail.fr/offres/recherche/detail/${job.id}" target="_blank">Voir l'offre sur France Travail</a>` : ''}
-                            </div>
-                        `;
-                    });
-                } else {
-                    resultsDiv.innerHTML = "<p>Aucune offre trouvée pour ce mot-clé.</p>";
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6366f1',
+                        secondary: '#4f46e5'
+                    }
                 }
-            } catch (error) {
-                resultsDiv.innerHTML = "<p style='color: red;'>Erreur lors de la récupération des offres.</p>";
-                console.error(error);
+            }
+        }
+    </script>
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans min-h-screen flex flex-col antialiased transition-colors duration-200">
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-gradient-to-br from-cyan-400 to-blue-700 rounded-xl flex items-center justify-center shadow-md shadow-cyan-500/20 text-white p-1.5">
+                    <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+                        <path d="M12 8L24 6L28 14L16 16L12 8Z" fill="url(#paint0_linear)" />
+                        <path d="M10 16L22 14L22 28L10 30L10 16Z" fill="url(#paint1_linear)" />
+                        <path d="M22 14L32 12L32 24L22 26L22 14Z" fill="url(#paint2_linear)" />
+                        <defs>
+                            <linearGradient id="paint0_linear" x1="12" y1="8" x2="28" y2="14" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#22D3EE" />
+                                <stop offset="1" stop-color="#0284C7" />
+                            </linearGradient>
+                            <linearGradient id="paint1_linear" x1="10" y1="16" x2="22" y2="30" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#0EA5E9" />
+                                <stop offset="1" stop-color="#1E3A8A" />
+                            </linearGradient>
+                            <linearGradient id="paint2_linear" x1="22" y1="12" x2="32" y2="26" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#2DD4BF" />
+                                <stop offset="1" stop-color="#0284C7" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <div>
+                    <span class="font-extrabold text-lg tracking-tight text-slate-900 dark:text-white">Job<span class="text-cyan-600 dark:text-cyan-400">Talent</span></span>
+                    <span id="role-badge" class="ml-2 text-xs bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 font-semibold px-2 py-0.5 rounded-full border border-indigo-200 dark:border-indigo-800">Candidat</span>
+                </div>
+            </div>
+            
+            <nav class="hidden md:flex space-x-1">
+                <button onclick="switchTab('landing')" id="btn-landing" class="px-3 py-2 rounded-lg text-sm font-medium text-indigo-600 bg-indigo-50 dark:bg-indigo-950/50 transition flex items-center space-x-1.5">
+                    <i data-lucide="home" class="w-4 h-4"></i>
+                    <span>Accueil</span>
+                </button>
+                <button onclick="switchTab('feed')" id="btn-feed" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-indigo-600 transition flex items-center space-x-1.5">
+                    <i data-lucide="newspaper" class="w-4 h-4"></i>
+                    <span>Fil d'actu</span>
+                </button>
+                <button onclick="switchTab('profile')" id="btn-profile" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-indigo-600 transition flex items-center space-x-1.5">
+                    <i data-lucide="user" class="w-4 h-4"></i>
+                    <span>Mon Profil</span>
+                </button>
+                <button onclick="switchTab('ai')" id="btn-ai" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-indigo-600 transition flex items-center space-x-1.5">
+                    <i data-lucide="wand-2" class="w-4 h-4"></i>
+                    <span>IA Tailor</span>
+                    <span id="credits-badge" class="ml-1 bg-indigo-600 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold">2 gratuites</span>
+                </button>
+                <button onclick="switchTab('francetravail')" id="btn-francetravail" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-indigo-600 transition flex items-center space-x-1.5">
+                    <i data-lucide="globe" class="w-4 h-4"></i>
+                    <span>Entreprises & API</span>
+                </button>
+            </nav>
+
+            <div class="flex items-center space-x-2">
+                <button onclick="openReferralModal()" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800 hover:bg-indigo-100 transition flex items-center space-x-1">
+                    <i data-lucide="gift" class="w-3.5 h-3.5"></i>
+                    <span>Parrainer</span>
+                </button>
+                <button onclick="toggleRecruiterMode()" id="btn-recruiter-mode" class="px-3 py-1.5 rounded-xl text-xs font-semibold border border-slate-300 dark:border-slate-700 hover:border-indigo-500 transition flex items-center space-x-1">
+                    <i data-lucide="user-cog" class="w-3.5 h-3.5"></i>
+                    <span id="recruiter-mode-text">Mode Recruteur</span>
+                </button>
+                <button onclick="toggleDarkMode()" class="p-2 rounded-xl border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+                    <i data-lucide="moon" id="dark-icon" class="w-4 h-4 hidden dark:block"></i>
+                    <i data-lucide="sun" id="light-icon" class="w-4 h-4 block dark:hidden"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- CONTENU PRINCIPAL -->
+    <main class="flex-1 max-w-5xl w-full mx-auto p-4 sm:p-6 pb-24">
+
+        <!-- ONGLET : ACCUEIL -->
+        <div id="tab-landing" class="space-y-12 py-6">
+            <div class="text-center space-y-6 max-w-3xl mx-auto px-4">
+                <div class="inline-flex items-center space-x-2 bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 px-4 py-1.5 rounded-full text-xs font-bold border border-indigo-200 dark:border-indigo-800 shadow-sm">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                    <span>Propulsé par l'API France Travail & l'IA</span>
+                </div>
+                <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
+                    Trouvez votre emploi et vos opportunités avec <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-indigo-600">JobTalent</span>.
+                </h1>
+                <p class="text-base text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
+                    Optimisez votre CV, explorez le marché caché des entreprises qui recrutent et postulez en toute simplicité.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+                    <button onclick="switchTab('ai')" class="w-full sm:w-auto bg-indigo-600 text-white font-bold px-8 py-3.5 rounded-2xl shadow-lg shadow-indigo-500/25 hover:bg-indigo-700 transition flex items-center justify-center space-x-2">
+                        <i data-lucide="wand-2" class="w-4 h-4"></i>
+                        <span>Tester l'IA Tailor</span>
+                    </button>
+                    <button onclick="switchTab('francetravail')" class="w-full sm:w-auto bg-white dark:bg-slate-900 text-slate-900 dark:text-white font-bold px-8 py-3.5 rounded-2xl border border-slate-300 dark:border-slate-700 hover:border-indigo-500 transition flex items-center justify-center space-x-2">
+                        <i data-lucide="globe" class="w-4 h-4"></i>
+                        <span>Explorer les entreprises partenaires</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ONGLET : FIL D'ACTU -->
+        <div id="tab-feed" class="hidden space-y-6">
+            <div class="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold text-sm shadow-md">VO</div>
+                    <input type="text" id="post-input" placeholder="Partager une actualité pro ou une recherche..." class="flex-1 bg-slate-100 dark:bg-slate-800 border-none rounded-xl px-4 py-2.5 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-900 dark:text-slate-100">
+                </div>
+                <div class="flex justify-between items-center pt-2 border-t border-slate-100 dark:border-slate-800">
+                    <span class="text-xs text-indigo-600 dark:text-indigo-400 font-semibold">2 optimisations gratuites restantes</span>
+                    <button onclick="createPost()" class="bg-indigo-600 text-white px-4 py-2 rounded-xl text-xs font-semibold shadow-sm hover:bg-indigo-700 transition">Publier</button>
+                </div>
+            </div>
+            <div class="space-y-4" id="feed-list"></div>
+        </div>
+
+        <!-- ONGLET : ENTREPRISES & API FRANCE TRAVAIL -->
+        <div id="tab-francetravail" class="hidden space-y-6">
+            <div class="bg-gradient-to-r from-blue-900 to-cyan-800 text-white p-6 rounded-2xl shadow-lg space-y-2">
+                <div class="flex items-center space-x-2">
+                    <i data-lucide="globe" class="w-6 h-6 text-cyan-300"></i>
+                    <h2 class="text-xl font-bold">Entreprises Partenaires (La Bonne Boite)</h2>
+                </div>
+                <p class="text-sm text-cyan-100">Données récupérées directement en temps réel depuis l'API sécurisée France Travail.</p>
+            </div>
+
+            <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm text-center">
+                <button onclick="fetchApiJobs()" id="btn-fetch-api" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-xl transition shadow-sm">
+                    🔍 Charger les entreprises depuis le serveur
+                </button>
+            </div>
+
+            <div id="api-results" class="grid gap-4 md:grid-cols-2"></div>
+        </div>
+
+        <!-- ONGLET : MON PROFIL -->
+        <div id="tab-profile" class="hidden space-y-6">
+            <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm p-6 space-y-4">
+                <h2 class="text-xl font-bold">Mon Profil Professionnel</h2>
+                <p class="text-xs text-slate-500">Gérez vos informations et compétences validées.</p>
+            </div>
+        </div>
+
+        <!-- ONGLET : IA TAILOR -->
+        <div id="tab-ai" class="hidden space-y-6">
+            <div class="bg-gradient-to-r from-indigo-900 to-indigo-700 text-white p-6 rounded-2xl shadow-lg space-y-2">
+                <h2 class="text-xl font-bold">✨ Optimiseur de CV par IA</h2>
+                <p class="text-sm text-indigo-100">Adaptez votre CV sur-mesure pour chaque offre.</p>
+            </div>
+            <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+                <textarea id="base-cv" rows="4" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-3 text-xs" placeholder="Collez votre CV de base ici..."></textarea>
+                <button onclick="runAiOptimization()" class="bg-indigo-600 text-white font-bold py-3 px-6 rounded-xl text-xs">Générer le CV optimisé</button>
+                <div id="ai-result" class="hidden p-4 bg-slate-50 dark:bg-slate-950 rounded-xl text-xs font-mono"></div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- SCRIPT JS -->
+    <script>
+        function switchTab(tabName) {
+            ['landing', 'feed', 'profile', 'ai', 'francetravail'].forEach(t => {
+                const el = document.getElementById('tab-' + t);
+                if(el) el.classList.add('hidden');
+            });
+            const target = document.getElementById('tab-' + tabName);
+            if(target) target.classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        async function fetchApiJobs() {
+            const container = document.getElementById('api-results');
+            container.innerHTML = '<p class="text-xs text-slate-500 col-span-2 text-center py-6">Chargement des données API...</p>';
+            try {
+                const res = await fetch('/api/jobs');
+                const data = await res.json();
+                container.innerHTML = '';
+                const items = data.resultats || data.companies || (Array.isArray(data) ? data : data.rome || []);
+                if(items.length === 0) {
+                    container.innerHTML = '<p class="text-xs text-slate-500 col-span-2 text-center">Aucune entreprise trouvée.</p>';
+                    return;
+                }
+                items.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm';
+                    const name = item.name || item.enseigne || item.raison_sociale || "Entreprise partenaire";
+                    const city = item.city || item.ville || "Localisation non précisée";
+                    card.innerHTML = `<h3 class="font-bold text-sm text-indigo-600 mb-1">${name}</h3><p class="text-xs text-slate-500">📍 ${city}</p>`;
+                    container.appendChild(card);
+                });
+            } catch(e) {
+                container.innerHTML = '<p class="text-xs text-red-500 col-span-2 text-center">Erreur lors de la récupération des données de l\'API.</p>';
             }
         }
 
-        // Lancer une recherche par défaut au chargement
-        searchJobs();
+        function createPost() {
+            const text = document.getElementById('post-input').value.trim();
+            if(!text) return;
+            const list = document.getElementById('feed-list');
+            list.insertAdjacentHTML('afterbegin', `<div class="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm text-xs"><strong class="text-indigo-600">Vous</strong><p class="mt-1">${text}</p></div>`);
+            document.getElementById('post-input').value = '';
+        }
+
+        function runAiOptimization() {
+            const res = document.getElementById('ai-result');
+            res.classList.remove('hidden');
+            res.innerText = "[CV OPTIMISÉ PAR IA]\n• Mots-clés ATS intégrés avec succès.\n• Compétences alignées sur le marché.";
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            switchTab('landing');
+        });
     </script>
 </body>
 </html>

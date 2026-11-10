@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobTalent - Recherche d'emploi</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; background: #f4f7f6; }
+        h1 { color: #333; text-align: center; }
+        .search-box { display: flex; gap: 10px; margin-bottom: 20px; }
+        input { flex: 1; padding: 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 5px; }
+        button { padding: 10px 20px; font-size: 16px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        .job-card { background: white; padding: 15px; margin-bottom: 10px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .job-card h3 { margin: 0 0 10px 0; color: #007bff; }
+        .job-card p { margin: 5px 0; color: #555; }
+    </style>
+</head>
+<body>
+
+    <h1>🚀 JobTalent</h1>
+    <p style="text-align: center; color: #666;">Trouve ton prochain emploi grâce à France Travail et l'IA</p>
+
+    <div class="search-box">
+        <input type="text" id="keyword" placeholder="Ex: Développeur, Comptable, Infirmière..." value="developpeur">
+        <button onclick="searchJobs()">Rechercher</button>
+    </div>
+
+    <div id="results">Recherche en cours ou clique sur Rechercher...</div>
+
+    <script>
+        async function searchJobs() {
+            const keyword = document.getElementById('keyword').value;
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = "Chargement des offres...";
+
+            try {
+                const response = await fetch(`/api/jobs?keyword=${keyword}`);
+                const data = await response.json();
+
+                if (data.resultats && data.resultats.length > 0) {
+                    resultsDiv.innerHTML = "";
+                    data.resultats.forEach(job => {
+                        resultsDiv.innerHTML += `
+                            <div class="job-card">
+                                <h3>${job.intitule}</h3>
+                                <p><strong>Entreprise :</strong> ${job.entreprise ? job.entreprise.nom : 'Non spécifié'}</p>
+                                <p><strong>Lieu :</strong> ${job.lieuTravail ? job.lieuTravail.libelle : 'Non spécifié'}</p>
+                                <p><strong>Type de contrat :</strong> ${job.typeContrat} - ${job.romeLibelle || ''}</p>
+                                <p>${job.description ? job.description.substring(0, 150) + '...' : ''}</p>
+                                ${job.romeCode ? `<a href="https://candidat.francetravail.fr/offres/recherche/detail/${job.id}" target="_blank">Voir l'offre sur France Travail</a>` : ''}
+                            </div>
+                        `;
+                    });
+                } else {
+                    resultsDiv.innerHTML = "<p>Aucune offre trouvée pour ce mot-clé.</p>";
+                }
+            } catch (error) {
+                resultsDiv.innerHTML = "<p style='color: red;'>Erreur lors de la récupération des offres.</p>";
+                console.error(error);
+            }
+        }
+
+        // Lancer une recherche par défaut au chargement
+        searchJobs();
+    </script>
+</body>
+</html>

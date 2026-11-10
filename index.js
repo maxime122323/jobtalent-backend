@@ -4,6 +4,7 @@ require('dotenv').config();
 const { GoogleGenAI } = require('@google/genai');
 
 const app = express();
+app.use(express.static('public'));
 app.use(cors());
 app.use(express.json());
 

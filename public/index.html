@@ -1,8 +1,4 @@
-import os
-
-os.makedirs('public', exist_ok=True)
-
-html_content = """<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr" class="light">
 <head>
     <meta charset="UTF-8">
@@ -25,6 +21,13 @@ html_content = """<!DOCTYPE html>
     </script>
     <!-- Lucide Icons CDN -->
     <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @keyframes bounce-slow {
+            0%, 100% { transform: translateY(-5%); animation-timing-function: cubic-bezier(0.8,0,1,1); }
+            50% { transform: none; animation-timing-function: cubic-bezier(0,0,0.2,1); }
+        }
+        .animate-bounce-slow { animation: bounce-slow 2s infinite; }
+    </style>
 </head>
 <body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans min-h-screen flex flex-col antialiased transition-colors duration-200">
 
@@ -149,7 +152,6 @@ html_content = """<!DOCTYPE html>
                 </div>
             </div>
 
-            <!-- Démo Live Card -->
             <div class="bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl max-w-3xl mx-auto space-y-6">
                 <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
                     <div class="flex items-center space-x-2">
@@ -177,7 +179,7 @@ html_content = """<!DOCTYPE html>
             </div>
         </div>
 
-        <!-- ONGLET : TARIFS & MODÈLE ÉCONOMIQUE (PROPRE ET STRUCTURÉ) -->
+        <!-- ONGLET : TARIFS & MODÈLE ÉCONOMIQUE -->
         <div id="tab-pricing" class="hidden space-y-10 py-4">
             <div class="text-center space-y-3 max-w-2xl mx-auto">
                 <div class="inline-flex items-center space-x-1.5 bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 px-3.5 py-1 rounded-full text-xs font-bold">
@@ -210,7 +212,7 @@ html_content = """<!DOCTYPE html>
                                 <li class="flex items-center space-x-2"><span>✅</span><span>Création du profil professionnel de base</span></li>
                             </ul>
                         </div>
-                        <button onclick="switchTab('ai')" class="w-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 font-bold py-3 rounded-xl text-xs transition">Commencer gratuitement</button>
+                        <button onclick="switchTab('ai')" class="w-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 font-bold py-3 rounded-xl text-xs transition">Commencer gratuitement</button>
                     </div>
 
                     <!-- Offre JobTalent Pro -->
@@ -220,7 +222,7 @@ html_content = """<!DOCTYPE html>
                             <span class="text-xs bg-indigo-600 text-white font-bold px-3 py-1 rounded-full">🟣 Offre JobTalent Pro</span>
                             <div class="flex items-baseline space-x-1">
                                 <span class="text-3xl font-extrabold text-indigo-600 dark:text-indigo-400">9,99 €</span>
-                                <span class="text-xs text-slate-500">/ mois (ou 79€ / an)</span>
+                                <span class="text-xs text-slate-500">/ mois (Offert en test 1-clic)</span>
                             </div>
                             <p class="text-xs text-slate-500">Pour les candidats actifs en quête rapide d'emploi et de visibilité maximale.</p>
                             <ul class="space-y-2 text-xs text-slate-700 dark:text-slate-300">
@@ -231,7 +233,7 @@ html_content = """<!DOCTYPE html>
                                 <li class="flex items-center space-x-2"><span>💬</span><span>Accès prioritaire au chat recruteur dès match > 90%</span></li>
                             </ul>
                         </div>
-                        <button onclick="upgradeToPro()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-xl text-xs shadow-md transition">Activer JobTalent Pro (9,99€)</button>
+                        <button onclick="upgradeToPro()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-xl text-xs shadow-md transition">Activer JobTalent Pro (Gratuit en Test)</button>
                     </div>
                 </div>
             </div>
@@ -243,7 +245,6 @@ html_content = """<!DOCTYPE html>
                     <span>2. Offres & Tarifs Entreprises & Recruteurs (B2B)</span>
                 </h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Offre Starter -->
                     <div class="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-5 flex flex-col justify-between">
                         <div class="space-y-3">
                             <span class="text-xs bg-cyan-50 dark:bg-cyan-950 text-cyan-700 dark:text-cyan-300 font-bold px-3 py-1 rounded-full">🔵 Offre Recruteur Starter</span>
@@ -256,13 +257,11 @@ html_content = """<!DOCTYPE html>
                                 <li class="flex items-center space-x-2"><span>✅</span><span>Jusqu'à <strong>5 offres d'emploi</strong> actives simultanément</span></li>
                                 <li class="flex items-center space-x-2"><span>📊</span><span>Classement automatique des candidats par score de compatibilité (IA Match)</span></li>
                                 <li class="flex items-center space-x-2"><span>👥</span><span>Espace de collaboration d'équipe (notes internes et avis)</span></li>
-                                <li class="flex items-center space-x-2"><span>📅</span><span>Planification d'entretiens synchronisée (Google Calendar / Outlook)</span></li>
                             </ul>
                         </div>
-                        <button onclick="showToast('Contactez notre équipe commerciale B2B pour activer Starter !')" class="w-full bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-3 rounded-xl text-xs transition">Souscrire Offre Starter</button>
+                        <button onclick="showToast('Contactez l\'équipe B2B pour activer Starter !')" class="w-full bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-3 rounded-xl text-xs transition">Souscrire Offre Starter</button>
                     </div>
 
-                    <!-- Offre Scale -->
                     <div class="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-5 flex flex-col justify-between">
                         <div class="space-y-3">
                             <span class="text-xs bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300 font-bold px-3 py-1 rounded-full">🔷 Offre Recruteur Scale</span>
@@ -274,11 +273,10 @@ html_content = """<!DOCTYPE html>
                             <ul class="space-y-2 text-xs text-slate-700 dark:text-slate-300">
                                 <li class="flex items-center space-x-2"><span>🚀</span><span>Offres d'emploi et sourcing <strong>illimités</strong></span></li>
                                 <li class="flex items-center space-x-2"><span>🤖</span><span>Matching IA avancé et recherche sémantique de talents</span></li>
-                                <li class="flex items-center space-x-2"><span>🔗</span><span>Intégration ATS & API sur-mesure</span></li>
                                 <li class="flex items-center space-x-2"><span>⭐</span><span>Account Manager dédié et support prioritaire 7j/7</span></li>
                             </ul>
                         </div>
-                        <button onclick="showToast('Contactez l\'équipe Scale pour une démo personnalisée !')" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl text-xs transition">Souscrire Offre Scale</button>
+                        <button onclick="showToast('Contactez l\'équipe Scale pour une démo !')" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl text-xs transition">Souscrire Offre Scale</button>
                     </div>
                 </div>
             </div>
@@ -488,7 +486,7 @@ html_content = """<!DOCTYPE html>
             </div>
             <h3 class="text-2xl font-extrabold">Passez à JobTalent Pro</h3>
             <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                Débloquez tout le potentiel de la plateforme pour seulement <strong>9,99 € / mois</strong> :
+                Débloquez tout le potentiel de la plateforme instantanément en mode test :
             </p>
             <ul class="text-xs text-left space-y-2 bg-slate-50 dark:bg-slate-800/60 p-4 rounded-xl font-medium">
                 <li>🔍 <strong>Qui a consulté votre profil ?</strong> (Voir les recruteurs en direct)</li>
@@ -497,9 +495,30 @@ html_content = """<!DOCTYPE html>
                 <li>🛡️ Badge officiel <strong>"Pro Vérifié"</strong></li>
             </ul>
             <div class="space-y-2 pt-2">
-                <button onclick="upgradeToPro()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3.5 rounded-xl shadow-lg transition">Activer JobTalent Pro (9,99€/mois)</button>
+                <button onclick="upgradeToPro()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3.5 rounded-xl shadow-lg transition flex items-center justify-center space-x-2">
+                    <i data-lucide="zap" class="w-4 h-4"></i>
+                    <span>Activer Pro Gratuitement (Simulation 1-clic)</span>
+                </button>
                 <button onclick="closePricingModal()" class="w-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-semibold py-2.5 rounded-xl text-xs">Plus tard</button>
             </div>
+        </div>
+    </div>
+
+    <!-- MODAL ANIMATION SUCCÈS (FÉLICITATIONS) -->
+    <div id="success-animation-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-900 max-w-sm w-full p-8 rounded-3xl shadow-2xl border border-indigo-500/30 text-center space-y-5 transform transition-all animate-bounce-slow">
+            <div class="w-20 h-20 bg-gradient-to-tr from-amber-400 to-indigo-600 text-white rounded-3xl flex items-center justify-center mx-auto shadow-xl shadow-indigo-500/40">
+                <i data-lucide="award" class="w-10 h-10 animate-pulse"></i>
+            </div>
+            <div class="space-y-2">
+                <h3 class="text-2xl font-extrabold text-slate-900 dark:text-white">Félicitations ! 🎉</h3>
+                <p class="text-xs text-slate-600 dark:text-slate-300">
+                    Votre abonnement <strong>JobTalent Pro</strong> a été activé avec succès ! Profitez de tous vos avantages exclusifs.
+                </p>
+            </div>
+            <button onclick="closeSuccessModal()" class="w-full bg-gradient-to-r from-cyan-500 to-indigo-600 hover:opacity-95 text-white font-bold py-3 rounded-xl text-xs shadow-lg transition">
+                C'est parti ! 🚀
+            </button>
         </div>
     </div>
 
@@ -543,6 +562,11 @@ html_content = """<!DOCTYPE html>
 
         function closePricingModal() {
             document.getElementById('pricing-modal').classList.add('hidden');
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('success-animation-modal').classList.add('hidden');
+            switchTab('profile');
         }
 
         async function fetchApiJobs() {
@@ -599,13 +623,18 @@ html_content = """<!DOCTYPE html>
         function upgradeToPro() {
             isProUser = true;
             closePricingModal();
+            
+            // Affichage de l'animation de succès spectaculaire
+            document.getElementById('success-animation-modal').classList.remove('hidden');
+            
             document.getElementById('profile-verified-badge').classList.remove('hidden');
             document.getElementById('boost-status-banner').classList.remove('hidden');
             document.getElementById('visitors-locked').classList.add('hidden');
             document.getElementById('visitors-unlocked').classList.remove('hidden');
             const badge = document.getElementById('credits-badge');
             if(badge) badge.innerText = "Pro Illimité";
-            showToast("🎉 JobTalent Pro activé avec succès !");
+            
+            lucide.createIcons();
         }
 
         function calculateSalary() {
@@ -642,9 +671,3 @@ html_content = """<!DOCTYPE html>
     </script>
 </body>
 </html>
-"""
-
-with open('public/index.html', 'w', encoding='utf-8') as f:
-    f.write(html_content)
-
-print("public/index.html updated successfully.")
